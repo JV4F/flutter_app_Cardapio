@@ -3,6 +3,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app08/view/cadastro_view.dart';
+import 'package:flutter_app08/view/cardapio_view.dart';
 import 'package:flutter_app08/view/homepage_view.dart';
 
 
@@ -28,6 +29,7 @@ class MainApp extends StatelessWidget {
       routes: {
         'homepage' : (context) => HomePageView(),
         'cadastro' : (context) => CadastroView(),
+        'cardapio' : (context) => CardapioView(),
       },
     );
   }

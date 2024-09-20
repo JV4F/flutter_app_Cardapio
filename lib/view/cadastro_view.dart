@@ -184,7 +184,11 @@ class _CadastroViewState extends State<CadastroView> {
                       ),
                       onPressed:(){
 
-                        //Navigator.pop(context);
+                        if(formkey.currentState!.validate()){
+
+                          Navigator.pushNamed(context, 'cardapio');
+
+                        }
 
                       },child: Text('Cadastrar')
                     ),

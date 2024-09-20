@@ -92,6 +92,7 @@ class _HomePageViewState extends State<HomePageView> {
                       ),
 
                       onPressed: () {
+                        
                         Navigator.pushNamed(context, 'cadastro');
                   
                       }, child: Text("Cadastrar-se"),
