@@ -1,7 +1,7 @@
 class Produto {
 
   //Atriburtos
-  final String precoProd;
+  final double precoProd;
   final String nomeProd;
   final String fotoProd;
 
@@ -12,11 +12,12 @@ class Produto {
 
   static List<Produto> gerardados(){
     List<Produto> cardapio = [];
-    cardapio.add(Produto("R¢ 25", "Pizza Calabresa", "lib/image/pizzacalabresa.jpg"));
-    cardapio.add(Produto("R¢ 30", "Pizza Lombo", "lib/image/pizzacalabresa.jpg"));
+    cardapio.add(Produto(25, "Pizza Calabresa", 'lib/image/pizzacalabresa.jpg'));
+    cardapio.add(Produto(30, "Pizza Lombo", "lib/image/pizzacalabresa.jpg"));
 
     return cardapio;
   }
+  
 
 
 

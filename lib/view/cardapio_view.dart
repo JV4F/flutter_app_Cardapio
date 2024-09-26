@@ -13,7 +13,7 @@ class CardapioView extends StatefulWidget {
 class _CardapioViewState extends State<CardapioView> {
 
   //Atributo
-  var cardapio = [];
+  List<Produto> cardapio = [];
 
    @override
   void initState(){
@@ -42,25 +42,31 @@ class _CardapioViewState extends State<CardapioView> {
 
               child: ListTile(
 
+                leading: Image.asset(cardapio[index].fotoProd),
+
                 title: Text(
-                  cardapio[index].precoProd,
+                  cardapio[index].nomeProd,
                   style: TextStyle(
-                    fontSize: 24
+                  fontSize: 20,
                   ),
                 ),
 
                 subtitle: Text(
-                  cardapio[index].nomeProd,
-                  style: TextStyle(
-                    fontSize: 20,
+                  '${cardapio[index].precoProd.toStringAsFixed(2)}',
+                    style: TextStyle(
+                    fontSize: 16,
                     fontStyle: FontStyle.normal,
                   ),
                 ),
 
+                trailing: Icon(Icons.arrow_right),
+
 
               ),
+
+              
             );
-          }
+          },
         ),
       ),
     );
