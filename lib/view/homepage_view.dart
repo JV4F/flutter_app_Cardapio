@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 
@@ -25,18 +25,26 @@ class _HomePageViewState extends State<HomePageView> {
         //Barra De Cima
         appBar: AppBar(
             backgroundColor: Colors.purple.shade900,
-            title: Text(
-              'Home Page',
-             style: TextStyle(color: Colors.white),
+            title: Row(
+              children: [
+
+                Text(
+                  'Home Page',
+                 style: TextStyle(color: Colors.white),
+                ),
+
+                SizedBox(width: 180), // Espaçamento entre o Text e o Icon
+
+                //Icone do AppBar
+                 Icon(
+                  Icons.restaurant_outlined, 
+                  color: Colors.white,
+                  size: 30,
+                ),
+                //Fim Icon AppBar
+
+              ],
             ),
-           
-           //Icone barra cima
-           leading: Icon(
-              Icons.restaurant_outlined,
-              color: Colors.white,
-              size: 30,
-            ),
-            //Fim Icone barra cima
           ),
           //Fim barra cima
 
