@@ -42,8 +42,10 @@ class _CardapioViewState extends State<CardapioView> {
 
               child: ListTile(
 
+                //Exibe image do produto no cardapio
                 leading: Image.asset(cardapio[index].fotoProd),
 
+                //Exibe nome do produto no cardapio
                 title: Text(
                   cardapio[index].nomeProd,
                   style: TextStyle(
@@ -51,6 +53,7 @@ class _CardapioViewState extends State<CardapioView> {
                   ),
                 ),
 
+                //Exibe preço do produto no cardapio
                 subtitle: Text(
                   '${cardapio[index].precoProd.toStringAsFixed(2)}',
                     style: TextStyle(
@@ -59,13 +62,30 @@ class _CardapioViewState extends State<CardapioView> {
                   ),
                 ),
 
-                trailing: Icon(Icons.arrow_right),
+                //Icone seta no produto
+                trailing: Icon(
+                  Icons.arrow_right,
+                ),
 
+                hoverColor: Colors.purple.shade100,
+                onTap: () {
+                  
+                  //Retorna o item da lista selecionado
+                  Produto dados = cardapio[index];
+
+                  //Navegar para Detalhes
+                  Navigator.pushNamed(
+                    context, 'detalhes',
+                    arguments: dados,
+                  );
+
+                },//OnTap
 
               ),
 
-              
             );
+
+
           },
         ),
       ),

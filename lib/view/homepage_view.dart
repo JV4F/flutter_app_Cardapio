@@ -33,7 +33,7 @@ class _HomePageViewState extends State<HomePageView> {
                  style: TextStyle(color: Colors.white),
                 ),
 
-                SizedBox(width: 180), // Espaçamento entre o Text e o Icon
+                SizedBox(width: 200), // Espaçamento entre o Text e o Icon
 
                 //Icone do AppBar
                  Icon(

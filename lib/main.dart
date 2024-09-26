@@ -4,6 +4,8 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app08/view/cadastro_view.dart';
 import 'package:flutter_app08/view/cardapio_view.dart';
+import 'package:flutter_app08/view/carrinho_view.dart';
+import 'package:flutter_app08/view/detalhes_view.dart';
 import 'package:flutter_app08/view/homepage_view.dart';
 
 
@@ -30,6 +32,8 @@ class MainApp extends StatelessWidget {
         'homepage' : (context) => HomePageView(),
         'cadastro' : (context) => CadastroView(),
         'cardapio' : (context) => CardapioView(),
+        'detalhes' : (context) => DetalhesView(),
+        'carrinho' : (context) => CarrinhoView(),
       },
     );
   }
