@@ -1,6 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, empty_statements
 import 'package:flutter/material.dart';
-import 'package:flutter_app08/model/produto.dart';
+import 'package:flutter_app08/service/produto_service.dart';
+import 'package:get_it/get_it.dart';
+
+//Atualizando o serviço CardapioService
+final ProdutoService srv = GetIt.instance<ProdutoService>();
+
 
 class DetalhesView extends StatefulWidget {
   const DetalhesView({super.key});
@@ -10,10 +15,13 @@ class DetalhesView extends StatefulWidget {
 }
 
 class _DetalhesViewState extends State<DetalhesView> {
+  
+
   @override
   Widget build(BuildContext context) {
 
-    final Produto dados = ModalRoute.of(context)!.settings.arguments as Produto;
+    final idProduto = ModalRoute.of(context)!.settings.arguments;
+    var produto = srv.retornarProduto(idProduto);
     
     return Scaffold(
 
@@ -41,7 +49,7 @@ class _DetalhesViewState extends State<DetalhesView> {
             //Exibe Nome Produto no detalhe
             ListTile(
               title: Text(
-                dados.nomeProd,
+                produto.nomeProd,
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -51,7 +59,8 @@ class _DetalhesViewState extends State<DetalhesView> {
             //Exibe Descrição do produto no detalhe
             ListTile(
               subtitle: Text(
-                dados.descricaoProd,
+                //dados.descricaoProd,
+                produto.descricaoProd,
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -62,7 +71,8 @@ class _DetalhesViewState extends State<DetalhesView> {
             ListTile(
               title: Text(
                 'Preço:  R¢'
-                '${dados.precoProd.toStringAsFixed(2)}',
+                //'${dados.precoProd.toStringAsFixed(2)}',
+                '${produto.precoProd.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 20),
                 
               ),
@@ -82,8 +92,15 @@ class _DetalhesViewState extends State<DetalhesView> {
                   onPressed:(){
                     
                     //Icone sem função no momento, carrinho em desenvolvimento
+                     // Produto dadosCar = dados;
 
+                    //Navegar para Detalhes
+                    Navigator.pushNamed(
+                      context, 'carrinho',
+                    );
+                   
                   }
+
                 )
               ],
             ),

@@ -83,6 +83,8 @@ class _HomePageViewState extends State<HomePageView> {
 
                       onPressed: (){
                         
+                        Navigator.pushNamed(context, 'login');
+                        
                       }, child: Text("Login"),
                     ),
                     //Fim Botão Login

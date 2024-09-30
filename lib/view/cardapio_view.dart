@@ -2,6 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app08/model/produto.dart';
+import 'package:flutter_app08/service/produto_service.dart';
+import 'package:get_it/get_it.dart';
+
+//Utilizar o serviço CardapioService
+final ProdutoService srv = GetIt.instance<ProdutoService>();
 
 class CardapioView extends StatefulWidget {
   const CardapioView({super.key});
@@ -16,10 +21,10 @@ class _CardapioViewState extends State<CardapioView> {
   List<Produto> cardapio = [];
 
    @override
-  void initState(){
+  /*void initState(){
    cardapio = Produto.gerardados();
     super.initState(); 
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,7 @@ class _CardapioViewState extends State<CardapioView> {
       body: Padding(
         padding: EdgeInsets.all(20),
         child: ListView.builder(
-          itemCount: cardapio.length,
+          itemCount: srv.produtos.length,
           itemBuilder: (context, index){
 
             return Card(
@@ -43,11 +48,11 @@ class _CardapioViewState extends State<CardapioView> {
               child: ListTile(
 
                 //Exibe image do produto no cardapio
-                leading: Image.asset(cardapio[index].fotoProd),
+                leading: Image.asset(srv.produtos[index].fotoProd),
 
                 //Exibe nome do produto no cardapio
                 title: Text(
-                  cardapio[index].nomeProd,
+                  srv.produtos[index].nomeProd,
                   style: TextStyle(
                   fontSize: 20,
                   ),
@@ -55,7 +60,7 @@ class _CardapioViewState extends State<CardapioView> {
 
                 //Exibe preço do produto no cardapio
                 subtitle: Text(
-                  '${cardapio[index].precoProd.toStringAsFixed(2)}',
+                  '${srv.produtos[index].precoProd.toStringAsFixed(2)}',
                     style: TextStyle(
                     fontSize: 16,
                     fontStyle: FontStyle.normal,
@@ -71,12 +76,12 @@ class _CardapioViewState extends State<CardapioView> {
                 onTap: () {
                   
                   //Retorna o item da lista selecionado
-                  Produto dados = cardapio[index];
+                  //Produto dados = cardapio[index];
 
                   //Navegar para Detalhes
                   Navigator.pushNamed(
                     context, 'detalhes',
-                    arguments: dados,
+                    arguments: index,
                   );
 
                 },//OnTap
