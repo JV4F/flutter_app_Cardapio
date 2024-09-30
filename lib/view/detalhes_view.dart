@@ -28,6 +28,17 @@ class _DetalhesViewState extends State<DetalhesView> {
       //Barra Superior
       appBar: AppBar(
         backgroundColor: Colors.purple.shade900,
+        
+        //Seta para voltar
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed:(){
+            Navigator.pop(context);
+          }, 
+        ),
+        //Fim Seta
+
         title: Text(
           'Detalhes',
           style: TextStyle(color: Colors.white),
@@ -84,36 +95,31 @@ class _DetalhesViewState extends State<DetalhesView> {
             //Icone do carrinho
             //Foi colocado em uma row para que possamos editar o espaçamento horizontal
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(width: 280),
-                IconButton(
-                  icon: const Icon(Icons.shopping_cart),
-                  iconSize: 40,
+                ElevatedButton(
+                   style: ElevatedButton.styleFrom(
+                      minimumSize: Size(10, 50),
+                      backgroundColor: Colors.purple.shade900,
+                      foregroundColor: Colors.white,
+                      textStyle: TextStyle(fontSize: 20),
+                    ),
+                    
                   onPressed:(){
                     
-                    //Icone sem função no momento, carrinho em desenvolvimento
-                     // Produto dadosCar = dados;
+                    Navigator.pushNamed(context, 'carrinho');
 
-                    //Navegar para Detalhes
-                    Navigator.pushNamed(
-                      context, 'carrinho',
-                    );
-                   
-                  }
-
+                 }, child: Text('+'),
                 )
               ],
             ),
             //Fim Icone do carrinho
 
-
           ],
         )
       
       ),
-
-
-
 
     );
   }

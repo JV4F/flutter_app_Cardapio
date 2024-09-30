@@ -2,43 +2,49 @@
 
 import 'package:flutter/material.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class EsqSenhaView extends StatefulWidget {
+  const EsqSenhaView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<EsqSenhaView> createState() => _EsqSenhaViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _EsqSenhaViewState extends State<EsqSenhaView> {
+
+  //Atributos
 
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final msgKey = GlobalKey<ScaffoldMessengerState>();
 
   var email = TextEditingController();
-  var senha = TextEditingController();
+  var confirmaEmail = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      //Barra superior
       appBar: AppBar(
         backgroundColor: Colors.purple.shade900,
 
+        //Seta para voltar
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed:(){
             Navigator.pop(context);
-          }, 
+          }
         ),
+        //Fim seta
 
-        title: Text(
-          'Login',
-          style: TextStyle(color: Colors.white),
-        ),
-        
+          title: Text(
+            'Recuperar Senha',
+            style: TextStyle(color: Colors.white),
+          ),
       ),
+      //Fim barra superior
 
-      body: Padding(
+       body: Padding(
 
         padding: const EdgeInsets.fromLTRB(30, 40, 30, 40), // Margem
 
@@ -62,7 +68,6 @@ class _LoginViewState extends State<LoginView> {
 
                   //Campo Email
                   TextFormField(
-                    
                     controller: email,
                     decoration: InputDecoration(
                       icon: Icon(Icons.mail),
@@ -86,57 +91,39 @@ class _LoginViewState extends State<LoginView> {
 
                   ),
                   //Fim campo Email
+                  
+                  SizedBox(height: 20),
 
-                    SizedBox(height: 20), // Espaçamento
-
-                  //Campo Senha
+                   //Campo ConfirmaEmail
                   TextFormField(
-                    
-                    controller: senha,
+                    controller: confirmaEmail,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.key),
-                      labelText: 'Senha: ',
+                      icon: Icon(Icons.mail),
+                      labelText: 'Confirme o Email: ',
                       labelStyle: TextStyle(color: Colors.purple.shade100),
-                      hintText: 'Informe a Senha',
+                      hintText: 'Informe o Email',
                       border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0), 
                   ),
                     ),
 
-                    validator: (senha){
-                      if(senha == null){
-                        return 'Informe o Senha';
+                    validator: (confirmaEmail){
+                      if(confirmaEmail == null){
+                        return 'Informe o Email';
                       }
-                      else if(senha.isEmpty){
-                        return 'Informe o Senha';
+                      else if(confirmaEmail.isEmpty){
+                        return 'Informe o Email';
                       }
                       return null; 
                     }
 
                   ),
-                  //Fim campo Senha
+                  //Fim campo ConfirmaEmail
 
-                  SizedBox(height: 10),
+                    SizedBox(height: 30), // Espaçamento
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                        onPressed:(){
-                          Navigator.pushNamed(context, 'recupera');
-                        },child: Text('Esqueceu a senha?'),
-                      ),
-                    ],
-                  ),
 
-                  SizedBox(height: 30),
-
+                  //Botão para adicionar ao carrinho
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(500, 50),
@@ -147,11 +134,12 @@ class _LoginViewState extends State<LoginView> {
                     onPressed:(){
 
                       if(formkey.currentState!.validate()){
-                        Navigator.pushNamed(context, 'cardapio');
+                        Navigator.pop(context);
                       }
 
-                    },child: Text('Login')
+                    },child: Text('Enviar')
                   ),
+                  //Fim botão
                 ],
               )
             ],

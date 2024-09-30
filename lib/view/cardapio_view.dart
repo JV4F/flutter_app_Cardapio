@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app08/model/produto.dart';
@@ -20,21 +20,44 @@ class _CardapioViewState extends State<CardapioView> {
   //Atributo
   List<Produto> cardapio = [];
 
-   @override
-  /*void initState(){
-   cardapio = Produto.gerardados();
-    super.initState(); 
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple.shade900,
-        title: Text(
-          "Cardapio",
-          style: TextStyle(color: Colors.white),
-          ),
+
+        //Seta para voltar 
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed:(){
+            Navigator.pop(context, 'login');
+          }, 
+        ),
+        //Fim seta
+
+        title: Row( //Row para poder ajustar o icone do carrinho no appbar
+          children: [
+
+            Text(
+              "Cardapio",
+              style: TextStyle(color: Colors.white),
+              ),
+
+              SizedBox(width: 165), //Espaçamento
+
+              //Icone do carrinho no appbar
+              IconButton(
+                icon: const Icon(Icons.shopping_cart),
+                iconSize: 30,
+                color: Colors.white,
+                onPressed:(){
+                  Navigator.pushNamed(context, 'carrinho');
+                }
+              )
+              //fim Icone carrinho
+          ],
+        ),
       ),
 
       body: Padding(
@@ -75,9 +98,6 @@ class _CardapioViewState extends State<CardapioView> {
                 hoverColor: Colors.purple.shade100,
                 onTap: () {
                   
-                  //Retorna o item da lista selecionado
-                  //Produto dados = cardapio[index];
-
                   //Navegar para Detalhes
                   Navigator.pushNamed(
                     context, 'detalhes',
@@ -89,8 +109,6 @@ class _CardapioViewState extends State<CardapioView> {
               ),
 
             );
-
-
           },
         ),
       ),

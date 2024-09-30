@@ -8,6 +8,7 @@ import 'package:flutter_app08/view/cadastro_view.dart';
 import 'package:flutter_app08/view/cardapio_view.dart';
 import 'package:flutter_app08/view/carrinho_view.dart';
 import 'package:flutter_app08/view/detalhes_view.dart';
+import 'package:flutter_app08/view/esq_senha_view.dart';
 import 'package:flutter_app08/view/homepage_view.dart';
 import 'package:flutter_app08/view/login_view.dart';
 import 'package:get_it/get_it.dart';
@@ -44,6 +45,7 @@ class MainApp extends StatelessWidget {
       routes: {
         'homepage' : (context) => HomePageView(),
         'login'    : (context) => LoginView(),
+        'recupera' : (context) => EsqSenhaView(),
         'cadastro' : (context) => CadastroView(),
         'cardapio' : (context) => CardapioView(),
         'detalhes' : (context) => DetalhesView(),

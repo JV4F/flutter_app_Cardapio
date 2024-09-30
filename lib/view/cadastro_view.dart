@@ -12,6 +12,8 @@ class CadastroView extends StatefulWidget {
 
 class _CadastroViewState extends State<CadastroView> {
 
+  //Atributos
+
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final msgKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -27,7 +29,17 @@ class _CadastroViewState extends State<CadastroView> {
       //Barra De Cima
       appBar: AppBar(
 
-            backgroundColor: Colors.purple.shade900,
+          backgroundColor: Colors.purple.shade900,
+
+          //Seta pra voltar
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: Colors.white,
+            onPressed:(){
+              Navigator.pop(context);
+            }, 
+          ),
+          //Fim Seta
 
             title: Text(
               'Cadastre-se',

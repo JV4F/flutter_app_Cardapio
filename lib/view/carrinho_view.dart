@@ -17,6 +17,7 @@ class CarrinhoView extends StatefulWidget {
 
 class _CarrinhoViewState extends State<CarrinhoView> {
 
+  //Atributos
   List<Produto> carrinho = [];
 
   var formKey = GlobalKey<FormState>();
@@ -27,6 +28,17 @@ class _CarrinhoViewState extends State<CarrinhoView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple.shade900,
+
+        //Seta para voltar
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed:(){
+            Navigator.pop(context);
+          }, 
+        ),
+        //Fim seta
+
         title: Text(
           "Carrinho",
           style: TextStyle(color: Colors.white),
@@ -77,16 +89,12 @@ class _CarrinhoViewState extends State<CarrinhoView> {
 
             );
 
-
           },
         ),
       ),
-
       
     );
 
-
   }
-
 
 }
