@@ -25,33 +25,52 @@ class _CadastroViewState extends State<CadastroView> {
   @override
    Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green.shade700,
 
       //Barra De Cima
       appBar: AppBar(
 
-          backgroundColor: Colors.purple.shade900,
+          backgroundColor: Colors.red.shade900,
 
           //Seta pra voltar
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             color: Colors.white,
             onPressed:(){
-              Navigator.pop(context);
+              Navigator.popAndPushNamed(context, 'homepage');
             }, 
           ),
           //Fim Seta
 
-            title: Text(
-              'Cadastre-se',
-              style: TextStyle(color: Colors.white),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Cadastre-se',
+                  style: TextStyle(color: Colors.white),
+                ),
+
+                Image.asset('lib/image/logoapp.png', height: 80),
+                
+              ],
             ),
 
           ),
           //Fim barra cima
 
-      body: Padding(
+      body: Container(
 
-        padding: const EdgeInsets.fromLTRB(30, 40, 30, 40), // Margem
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('lib/image/fundoapp.jpg'),
+              fit: BoxFit.cover, //SERVE PARA EXPANDIR
+              colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.3),
+                BlendMode.dstATop, 
+              ),
+            ),
+          ),
 
         child: Form(
 
@@ -62,8 +81,7 @@ class _CadastroViewState extends State<CadastroView> {
             children: [
                 
                 //Inicio icone principal
-                Icon(Icons.account_circle_rounded, size:120),
-                Row(),
+                Image.asset('lib/image/logoapp.png', height: 300),
                 SizedBox(height: 20), // Espaçamento
                 //Fim icone principal
 
@@ -73,17 +91,23 @@ class _CadastroViewState extends State<CadastroView> {
 
                     //Campo Nome
                     TextFormField(
-                      
-                      controller: nome,
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.person),
-                        labelText: 'Nome: ',
-                        labelStyle: TextStyle(color: Colors.purple.shade100),
-                        hintText: 'Informe o Nome',
-                        border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0), 
-                    ),
+                    controller: nome,
+                    cursorColor: Colors.red,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.white)
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.red.shade900)
+                      ),
+                      iconColor: Colors.white,
+                      icon: Icon(Icons.mail),
+                      labelText: 'Nome: ',
+                      labelStyle: TextStyle(color: Colors.white),
+                      hintText: 'Informe o Nome',
+                    ),
 
                       validator: (nome){
                         if(nome == null){
@@ -102,16 +126,22 @@ class _CadastroViewState extends State<CadastroView> {
 
                     //Campo Email
                     TextFormField(
-                      
                       controller: email,
+                      cursorColor: Colors.red,
                       decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.red.shade900)
+                        ),
+                        iconColor: Colors.white,
                         icon: Icon(Icons.mail),
                         labelText: 'Email: ',
-                        labelStyle: TextStyle(color: Colors.purple.shade100),
+                        labelStyle: TextStyle(color: Colors.white),
                         hintText: 'Informe o Email',
-                        border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0), 
-                    ),
                       ),
 
                       validator: (email){
@@ -131,28 +161,24 @@ class _CadastroViewState extends State<CadastroView> {
 
                     //Campo Senha
                     TextFormField(
-                      
                       controller: senha,
+                      cursorColor: Colors.red,
                       decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.red.shade900)
+                        ),
+                        
+                        iconColor: Colors.white,
                         icon: Icon(Icons.key),
                         labelText: 'Senha: ',
-                        labelStyle: TextStyle(color: Colors.purple.shade100),
+                        labelStyle: TextStyle(color: Colors.white),
                         hintText: 'Informe a Senha',
-                        border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0), 
-                    ),
                       ),
-
-                      validator: (senha){
-                        if(senha == null){
-                          return 'Informe o Senha';
-                        }
-                        else if(senha.isEmpty){
-                          return 'Informe o Senha';
-                        }
-                        return null; 
-                      }
-
                     ),
                     //Fim campo Senha
 
@@ -160,17 +186,24 @@ class _CadastroViewState extends State<CadastroView> {
 
                     //Campo confirma Senha
                     TextFormField(
-                      
-                      controller: confirmaSenha,
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.key),
-                        labelText: ' Confirme a Senha: ',
-                        labelStyle: TextStyle(color: Colors.purple.shade100),
-                        hintText: 'Informe a Senha',
-                        border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0), 
-                    ),
+                    controller: confirmaSenha,
+                    cursorColor: Colors.red,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.white)
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.red.shade900)
+                      ),
+                      
+                      iconColor: Colors.white,
+                      icon: Icon(Icons.key),
+                      labelText: 'Senha: ',
+                      labelStyle: TextStyle(color: Colors.white),
+                      hintText: 'Confirme a Senha',
+                    ),
 
                       validator: (confirmaSenha){
                         if(confirmaSenha == null){
@@ -189,19 +222,16 @@ class _CadastroViewState extends State<CadastroView> {
 
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(500, 50),
-                        backgroundColor: Colors.purple.shade900,
-                        foregroundColor: Colors.white,
-                        textStyle: TextStyle(fontSize: 20),
+                        minimumSize: Size(350, 60),
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.red,
+                        textStyle: TextStyle(fontSize: 25),
                       ),
                       onPressed:(){
 
                         if(formkey.currentState!.validate()){
-
-                          Navigator.pushNamed(context, 'cardapio');
-
+                          Navigator.popAndPushNamed(context, 'categoria');
                         }
-
                       },child: Text('Cadastrar')
                     ),
 

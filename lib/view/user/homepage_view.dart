@@ -21,26 +21,21 @@ class _HomePageViewState extends State<HomePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green.shade700,
 
         //Barra De Cima
         appBar: AppBar(
-            backgroundColor: Colors.purple.shade900,
+            backgroundColor: Colors.red.shade900,
             title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-
                 Text(
-                  'Home Page',
+                  'Italian Pizza',
                  style: TextStyle(color: Colors.white),
                 ),
 
-                SizedBox(width: 200), // Espaçamento entre o Text e o Icon
-
                 //Icone do AppBar
-                 Icon(
-                  Icons.restaurant_outlined, 
-                  color: Colors.white,
-                  size: 30,
-                ),
+                 Image.asset('lib/image/logoapp.png', height: 80),
                 //Fim Icon AppBar
 
               ],
@@ -48,9 +43,18 @@ class _HomePageViewState extends State<HomePageView> {
           ),
           //Fim barra cima
 
-        body: Padding(
-
-          padding: const EdgeInsets.fromLTRB(30, 40, 30, 40), //Margem 
+        body: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('lib/image/fundoapp.jpg'),
+              fit: BoxFit.cover, //SERVE PARA EXPANDIR
+              colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.3),
+                BlendMode.dstATop, 
+              ),
+            ),
+          ),
 
           child: Form(
 
@@ -61,12 +65,20 @@ class _HomePageViewState extends State<HomePageView> {
               mainAxisAlignment: MainAxisAlignment.center, //Alinhar os elementos para o centro
 
               children: [
+
+                
                 
                 //Inicio Icone Principal
-                Icon(Icons.account_circle_rounded, size: 200),
-                SizedBox(height: 20), //Espaçamento
-                Row(), // Não sei explicar, mas é isso que mantem os widgets centralizados horizontalmente
-                SizedBox(height: 30), //Espaçamento
+                Column(
+                  children: [
+                    
+                    Image.asset('lib/image/logoapp.png',height: 500,),
+                  ],
+                ),
+                //SizedBox(height: 20), //Espaçamento
+               // Row(), // Não sei explicar, mas é isso que mantem os widgets centralizados horizontalmente
+
+                //SizedBox(height: 10), //Espaçamento
 
                 Column(
 
@@ -75,10 +87,10 @@ class _HomePageViewState extends State<HomePageView> {
                     //Botão Login
                     ElevatedButton(
                       style:ElevatedButton.styleFrom( 
-                        minimumSize: Size(500, 60),
-                        backgroundColor: Colors.purple.shade900, 
-                        foregroundColor: Colors.white,
-                        textStyle: TextStyle(fontSize: 20),
+                        minimumSize: Size(350, 60),
+                        backgroundColor: Colors.white, 
+                        foregroundColor: Colors.red,
+                        textStyle: TextStyle(fontSize: 25),
                       ),
 
                       onPressed: (){
@@ -95,10 +107,10 @@ class _HomePageViewState extends State<HomePageView> {
                     //Botão Cadastre-se
                     ElevatedButton(
                       style:ElevatedButton.styleFrom(
-                        minimumSize: Size(500, 60), 
-                        backgroundColor: Colors.purple.shade900, 
-                        foregroundColor: Colors.white,
-                        textStyle: TextStyle(fontSize: 20),
+                        minimumSize: Size(350, 60), 
+                        backgroundColor: Colors.white, 
+                        foregroundColor: Colors.red,
+                        textStyle: TextStyle(fontSize: 25),
                       ),
 
                       onPressed: () {

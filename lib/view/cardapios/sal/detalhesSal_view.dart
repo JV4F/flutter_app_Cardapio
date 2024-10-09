@@ -1,33 +1,30 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, empty_statements
+// ignore_for_file: prefer_const_constructors, file_names
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app08/model/produto.dart';
 import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
 
-//Atualizando o serviço CardapioService
 final ProdutoService srv = GetIt.instance<ProdutoService>();
 
-
-class DetalhesView extends StatefulWidget {
-  const DetalhesView({super.key});
+class DetalhessalView extends StatefulWidget {
+  const DetalhessalView({super.key});
 
   @override
-  State<DetalhesView> createState() => _DetalhesViewState();
+  State<DetalhessalView> createState() => _DetalhessalViewState();
 }
 
-class _DetalhesViewState extends State<DetalhesView> {
-  
-
+class _DetalhessalViewState extends State<DetalhessalView> {
   @override
   Widget build(BuildContext context) {
 
-    final idProduto = ModalRoute.of(context)!.settings.arguments;
-    var produto = srv.retornarProduto(idProduto);
-    
-    return Scaffold(
+    final Produto dadosSal = ModalRoute.of(context)!.settings.arguments as Produto;
 
-      //Barra Superior
+    return Scaffold(
+      backgroundColor: Colors.green.shade700,
+
       appBar: AppBar(
-        backgroundColor: Colors.purple.shade900,
+        backgroundColor: Colors.red.shade900,
         
         //Seta para voltar
         leading: IconButton(
@@ -46,7 +43,18 @@ class _DetalhesViewState extends State<DetalhesView> {
       ),
       //Fim Barra Superior
 
-      body: Padding(
+      body: Container(
+
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('lib/image/fundoapp.jpg'),
+              fit: BoxFit.cover, //SERVE PARA EXPANDIR
+              colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.3),
+                BlendMode.dstATop, 
+              ),
+            ),
+          ),
         
         padding: EdgeInsets.all(20),
 
@@ -55,12 +63,12 @@ class _DetalhesViewState extends State<DetalhesView> {
           children: [
 
             //Exibir Foto
-            Image.asset('lib/image/pizzacalabresa.jpg'),
+            Image.asset(dadosSal.fotoProd),
 
             //Exibe Nome Produto no detalhe
             ListTile(
               title: Text(
-                produto.nomeProd,
+                dadosSal.nomeProd,
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -71,7 +79,7 @@ class _DetalhesViewState extends State<DetalhesView> {
             ListTile(
               subtitle: Text(
                 //dados.descricaoProd,
-                produto.descricaoProd,
+                dadosSal.descricaoProd,
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -83,7 +91,7 @@ class _DetalhesViewState extends State<DetalhesView> {
               title: Text(
                 'Preço:  R¢'
                 //'${dados.precoProd.toStringAsFixed(2)}',
-                '${produto.precoProd.toStringAsFixed(2)}',
+                '${dadosSal.precoProd.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 20),
                 
               ),
@@ -101,14 +109,16 @@ class _DetalhesViewState extends State<DetalhesView> {
                 ElevatedButton(
                    style: ElevatedButton.styleFrom(
                       minimumSize: Size(10, 50),
-                      backgroundColor: Colors.purple.shade900,
+                      backgroundColor: Colors.red.shade900,
                       foregroundColor: Colors.white,
                       textStyle: TextStyle(fontSize: 20),
                     ),
                     
                   onPressed:(){
                     
-                    Navigator.pushNamed(context, 'carrinho');
+                    //Navigator.pushNamed(context, 'carrinho');
+                    srv.carrinho.add(Produto(dadosSal.precoProd, dadosSal.nomeProd, dadosSal.descricaoProd, dadosSal.fotoProd));
+                    srv.valorTotal += dadosSal.precoProd;
 
                  }, child: Text('+'),
                 )
@@ -120,7 +130,6 @@ class _DetalhesViewState extends State<DetalhesView> {
         )
       
       ),
-
     );
   }
 }

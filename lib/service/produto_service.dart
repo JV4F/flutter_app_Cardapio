@@ -2,8 +2,14 @@ import 'package:flutter_app08/model/produto.dart';
 
 class ProdutoService {
    List<Produto> produtos = [];
+   List<Produto> salgada = [];
+   List<Produto> doce = [];
+   List<Produto> bebida = [];
+   List<Produto> carrinho = [];
+  double valorTotal = 0;
 
-  void adicionarProduto(Produto produto) {
+
+  /*void adicionarProduto(Produto produto) {
     produtos.add(produto);
   }
 
@@ -13,6 +19,6 @@ class ProdutoService {
 
   Produto retornarProduto(id){
     return produtos[id];
-  }
+  }*/
 
 }

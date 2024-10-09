@@ -20,27 +20,44 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green.shade700,
       appBar: AppBar(
-        backgroundColor: Colors.purple.shade900,
+        backgroundColor: Colors.red.shade900,
 
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed:(){
-            Navigator.pop(context);
+            Navigator.popAndPushNamed(context, 'homepage');
           }, 
         ),
 
-        title: Text(
-          'Login',
-          style: TextStyle(color: Colors.white),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Login',
+              style: TextStyle(color: Colors.white),
+            ),
+
+            Image.asset('lib/image/logoapp.png', height: 80),
+          ],
         ),
         
       ),
 
-      body: Padding(
-
-        padding: const EdgeInsets.fromLTRB(30, 40, 30, 40), // Margem
+      body: Container(
+        padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('lib/image/fundoapp.jpg'),
+              fit: BoxFit.cover, //SERVE PARA EXPANDIR
+              colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.3),
+                BlendMode.dstATop, 
+              ),
+            ),
+          ),
 
         child: Form(
 
@@ -51,9 +68,7 @@ class _LoginViewState extends State<LoginView> {
             children: [
                 
               //Inicio icone principal
-              Icon(Icons.account_circle_rounded, size:120),
-              Row(),
-              SizedBox(height: 20), // Espaçamento
+              Image.asset('lib/image/logoapp.png', height: 300),
               //Fim icone principal
 
               Column(
@@ -62,16 +77,22 @@ class _LoginViewState extends State<LoginView> {
 
                   //Campo Email
                   TextFormField(
-                    
                     controller: email,
+                    cursorColor: Colors.red,
                     decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.white)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.red.shade900)
+                      ),
+                      iconColor: Colors.white,
                       icon: Icon(Icons.mail),
                       labelText: 'Email: ',
-                      labelStyle: TextStyle(color: Colors.purple.shade100),
+                      labelStyle: TextStyle(color: Colors.white),
                       hintText: 'Informe o Email',
-                      border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0), 
-                  ),
                     ),
 
                     validator: (email){
@@ -91,16 +112,23 @@ class _LoginViewState extends State<LoginView> {
 
                   //Campo Senha
                   TextFormField(
-                    
                     controller: senha,
+                    cursorColor: Colors.red,
                     decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.white)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.red.shade900)
+                      ),
+                      
+                      iconColor: Colors.white,
                       icon: Icon(Icons.key),
                       labelText: 'Senha: ',
-                      labelStyle: TextStyle(color: Colors.purple.shade100),
+                      labelStyle: TextStyle(color: Colors.white),
                       hintText: 'Informe a Senha',
-                      border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0), 
-                  ),
                     ),
 
                     validator: (senha){
@@ -123,6 +151,7 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       TextButton(
                         style: TextButton.styleFrom(
+                          foregroundColor: Colors.red.shade100,
                           textStyle: TextStyle(
                             fontSize: 15,
                             decoration: TextDecoration.underline,
@@ -139,15 +168,15 @@ class _LoginViewState extends State<LoginView> {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(500, 50),
-                      backgroundColor: Colors.purple.shade900,
-                      foregroundColor: Colors.white,
-                      textStyle: TextStyle(fontSize: 20),
+                      minimumSize: Size(350, 60),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.red,
+                      textStyle: TextStyle(fontSize: 25),
                     ),
                     onPressed:(){
 
                       if(formkey.currentState!.validate()){
-                        Navigator.pushNamed(context, 'cardapio');
+                        Navigator.popAndPushNamed(context, 'categoria');
                       }
 
                     },child: Text('Login')

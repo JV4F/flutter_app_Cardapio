@@ -1,53 +1,46 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app08/model/produto.dart';
 import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
 
-//Utilizar o serviço CardapioService
 final ProdutoService srv = GetIt.instance<ProdutoService>();
 
-class CardapioView extends StatefulWidget {
-  const CardapioView({super.key});
+class CardapiodoceView extends StatefulWidget {
+  const CardapiodoceView({super.key});
 
   @override
-  State<CardapioView> createState() => _CardapioViewState();
+  State<CardapiodoceView> createState() => _CardapiodoceViewState();
 }
 
-class _CardapioViewState extends State<CardapioView> {
-
-  //Atributo
-  List<Produto> cardapio = [];
-
+class _CardapiodoceViewState extends State<CardapiodoceView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green.shade700,
       appBar: AppBar(
-        backgroundColor: Colors.purple.shade900,
+        backgroundColor: Colors.red.shade900,
 
         //Seta para voltar 
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed:(){
-            Navigator.pop(context, 'login');
+            Navigator.pop(context, 'categoria');
           }, 
         ),
         //Fim seta
 
-        title: Row( //Row para poder ajustar o icone do carrinho no appbar
+        title:  Row(
           children: [
-
             Text(
-              "Cardapio",
+              "Pizzas Doce",
               style: TextStyle(color: Colors.white),
-              ),
+            ),
 
-              SizedBox(width: 165), //Espaçamento
+            SizedBox(width: 135),
 
-              //Icone do carrinho no appbar
-              IconButton(
+            IconButton(
                 icon: const Icon(Icons.shopping_cart),
                 iconSize: 30,
                 color: Colors.white,
@@ -55,15 +48,24 @@ class _CardapioViewState extends State<CardapioView> {
                   Navigator.pushNamed(context, 'carrinho');
                 }
               )
-              //fim Icone carrinho
           ],
-        ),
+        ),    
       ),
 
-      body: Padding(
+      body: Container( 
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('lib/image/fundoapp.jpg'),
+              fit: BoxFit.cover, //SERVE PARA EXPANDIR
+              colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.3),
+                BlendMode.dstATop, 
+              ),
+            ),
+          ),
         padding: EdgeInsets.all(20),
         child: ListView.builder(
-          itemCount: srv.produtos.length,
+          itemCount: srv.doce.length,
           itemBuilder: (context, index){
 
             return Card(
@@ -71,11 +73,11 @@ class _CardapioViewState extends State<CardapioView> {
               child: ListTile(
 
                 //Exibe image do produto no cardapio
-                leading: Image.asset(srv.produtos[index].fotoProd),
+                leading: Image.asset(srv.doce[index].fotoProd),
 
                 //Exibe nome do produto no cardapio
                 title: Text(
-                  srv.produtos[index].nomeProd,
+                  srv.doce[index].nomeProd,
                   style: TextStyle(
                   fontSize: 20,
                   ),
@@ -83,7 +85,7 @@ class _CardapioViewState extends State<CardapioView> {
 
                 //Exibe preço do produto no cardapio
                 subtitle: Text(
-                  '${srv.produtos[index].precoProd.toStringAsFixed(2)}',
+                  '${srv.doce[index].precoProd.toStringAsFixed(2)}',
                     style: TextStyle(
                     fontSize: 16,
                     fontStyle: FontStyle.normal,
@@ -100,8 +102,8 @@ class _CardapioViewState extends State<CardapioView> {
                   
                   //Navegar para Detalhes
                   Navigator.pushNamed(
-                    context, 'detalhes',
-                    arguments: index,
+                    context, 'detalhesdoce',
+                    arguments: srv.doce[index],
                   );
 
                 },//OnTap
@@ -112,9 +114,8 @@ class _CardapioViewState extends State<CardapioView> {
           },
         ),
       ),
+
+
     );
-
-    
   }
-
 }
