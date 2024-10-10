@@ -108,9 +108,19 @@ class _CarrinhoViewState extends State<CarrinhoView> {
                     trailing: IconButton(
                       icon: Icon(Icons.delete_forever),
                       onPressed: (){
-                        srv.carrinho.removeAt(index);
-                        Navigator.popAndPushNamed(context, 'carrinho');
-                        srv.valorTotal =- srv.carrinho[index].precoProd;
+
+                        setState(() {
+                           if(srv.carrinho.isEmpty){
+                            srv.valorTotal = 0;
+                        }
+
+                        if(srv.carrinho.isNotEmpty){
+                          srv.valorTotal = srv.valorTotal - srv.carrinho[index].precoProd;
+                        }
+
+                          srv.carrinho.removeAt(index);
+                        });
+                        
                       },
                     ),
                 

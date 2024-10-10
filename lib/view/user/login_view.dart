@@ -179,7 +179,7 @@ class _LoginViewState extends State<LoginView> {
                         Navigator.popAndPushNamed(context, 'categoria');
                       }
 
-                    },child: Text('Login')
+                    },child: Text('Entrar')
                   ),
                 ],
               )

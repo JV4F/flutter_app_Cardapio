@@ -197,7 +197,14 @@ class _ConfirmaPedidoViewState extends State<ConfirmaPedidoView> {
                         ),
                         onPressed: (){
                           Navigator.popAndPushNamed(context, 'categoria');
+                          srv.carrinho.length = 0;
                           srv.valorTotal = 0;
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+
+                            SnackBar(content: Text('Pedido Concluido'),duration: Duration(seconds: 2),)
+
+                          );
                         }, 
                         child: Text(
                           'Confirmar Pedido',
