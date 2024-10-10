@@ -1,3 +1,3 @@
-# flutter_app08
+# Projeto Cardapio em Flutter
 
 A new Flutter project.
