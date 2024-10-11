@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class EsqSenhaView extends StatefulWidget {
@@ -12,18 +13,21 @@ class EsqSenhaView extends StatefulWidget {
 class _EsqSenhaViewState extends State<EsqSenhaView> {
 
   //Atributos
-
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final msgKey = GlobalKey<ScaffoldMessengerState>();
-
   var email = TextEditingController();
   var confirmaEmail = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Colors.green.shade700,
+      
+      //Backgraund para clarear a imagem/Textura utilizada 
+      backgroundColor: Colors.green.shade700,
+
+      //Barra Superior
       appBar: AppBar(
+
         backgroundColor: Colors.red.shade900,
 
         leading: IconButton(
@@ -45,11 +49,15 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
             Image.asset('lib/image/logoapp.png', height: 80),
           ],
         ),
-        
       ),
+      //Fim Barra Superior
+
 
       body: Container(
-        padding: EdgeInsets.all(20),
+
+        padding: EdgeInsets.all(20), //Margem
+
+        //Imagem/Textura de fundo do app
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -60,6 +68,8 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
               ),
             ),
           ),
+        //Fim Imagem/Textura de fundo do app
+
 
         child: Form(
 
@@ -71,7 +81,8 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
                 
               //Inicio icone principal
               Image.asset('lib/image/logoapp.png', height: 300),
-              SizedBox(height: 20),              //Fim icone principal
+              SizedBox(height: 20),             
+              //Fim icone principal
 
               Column(
 
@@ -103,6 +114,9 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
                       }
                       else if(email.isEmpty){
                         return 'Informe o Email';
+                      }
+                      if(!EmailValidator.validate(email)){
+                          return 'Informe um Email válido';
                       }
                       return null; 
                     }
@@ -148,6 +162,7 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
 
                   SizedBox(height: 80),
 
+                  //Botão Enviar
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(350, 60),
@@ -158,17 +173,55 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
                     onPressed:(){
 
                       if(formkey.currentState!.validate()){
-                        Navigator.popAndPushNamed(context, 'login');
-                      }
+                        if(confirmaEmail.text == email.text){
+                          Navigator.popAndPushNamed(context, 'login');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Solicitação enviada!!', style: TextStyle(fontSize: 15)),
+                              duration: Duration(seconds: 3),
+                              backgroundColor: Colors.red,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(color: Colors.white, width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            )
+                          );
+                        }
+                        else if(confirmaEmail.text != email.text){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Emails não coincidem!!', style: TextStyle(fontSize: 15)),
+                              duration: Duration(seconds: 3),
+                              backgroundColor: Colors.red,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(color: Colors.white, width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            )
+                          );
+                        }
+                      } 
 
                     },child: Text('Enviar')
                   ),
-                ],
+                  //Fim Botão Enviar
+
+                ], //Children
+
               )
-            ],
+
+            ], //Children
+
           )
+
         ),
+
       ),
+
     );
-  }
-}
+
+  } //Builder
+
+} //Class

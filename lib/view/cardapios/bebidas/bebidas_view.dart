@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
 
-final ProdutoService srv = GetIt.instance<ProdutoService>();
+final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
 class BebidasView extends StatefulWidget {
   const BebidasView({super.key});
@@ -17,9 +17,13 @@ class _BebidasViewState extends State<BebidasView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      //Backgraund para clarear a imagem/Textura utilizada 
       backgroundColor: Colors.green.shade700,
+
+      //Barra Superior
       appBar: AppBar(
-        backgroundColor: Colors.red.shade900,
+        backgroundColor: Colors.red.shade900, //Cor barra superior
 
         //Seta para voltar 
         leading: IconButton(
@@ -31,15 +35,18 @@ class _BebidasViewState extends State<BebidasView> {
         ),
         //Fim seta
 
-        title:  Row(
+        title:  Row( //Linha para poder espaçar o Texto do Icone
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Espaçamento
           children: [
+
+            //Texto
             Text(
               "Bebidas",
               style: TextStyle(color: Colors.white),
             ),
+            //Fim Texto
 
-            SizedBox(width: 175),
-
+            //Icone Carrinho
             IconButton(
                 icon: const Icon(Icons.shopping_cart),
                 iconSize: 30,
@@ -48,11 +55,15 @@ class _BebidasViewState extends State<BebidasView> {
                   Navigator.pushNamed(context, 'carrinho');
                 }
               )
+              //Fim Icone Carrinho
           ],
         ),
       ),
+      //Fim Barra Superior
 
-      body: Container(
+      body: Container( 
+        
+        //Imagem/Textura de fundo do app
         decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -63,14 +74,18 @@ class _BebidasViewState extends State<BebidasView> {
               ),
             ),
           ),
-          padding: EdgeInsets.all(20),
+        // Fim Imagem/Textura de fundo do app
+
+          padding: EdgeInsets.all(20), //Margem
+
+          //Criação do Listview
           child: ListView.builder(
             itemCount: srv.bebida.length,
             itemBuilder: (context, index){
 
-            return Card(
+            return Card( //Para que os itens do cardapio fique em um "Cartão"
 
-              child: ListTile(
+              child: ListTile( //Inicio ListTile
 
                 //Exibe image do produto no cardapio
                 leading: Image.asset(srv.bebida[index].fotoProd),
@@ -97,24 +112,32 @@ class _BebidasViewState extends State<BebidasView> {
                   Icons.arrow_right,
                 ),
 
-                hoverColor: Colors.purple.shade100,
+                
+                hoverColor: Colors.purple.shade100, //Cor quando é colocado o item é clickado
+                
+                //Ação para o click no Produto
                 onTap: () {
-                  
                   //Navegar para Detalhes
                   Navigator.pushNamed(
                     context, 'detalhesbebidas',
-                    arguments: srv.bebida[index],
+                    arguments: srv.bebida[index], //Passando o index do produto para a proxima tela "detalhesbebidas"
                   );
-
-                },//OnTap
+                },
+                //Fim ação para o click no Produto
 
               ),
+              //Fim ListTile
 
             );
-          },
+
+          }, //Child
+
         ),
+
       ),
 
     );
-  }
-}
+
+  } //Build
+
+} //Class

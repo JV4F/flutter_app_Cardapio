@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
 
-final ProdutoService srv = GetIt.instance<ProdutoService>();
+final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
 class CategoriaView extends StatefulWidget {
   const CategoriaView({super.key});
@@ -18,9 +18,13 @@ class _CategoriaViewState extends State<CategoriaView> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+
+      //Backgraund para clarear a imagem/Textura utilizada
       backgroundColor: Colors.green.shade700,
+
+      //Barra Superior
       appBar: AppBar(
-        backgroundColor: Colors.red.shade900,
+        backgroundColor: Colors.red.shade900, //Cor barra superior
 
         //Seta para voltar 
         leading: IconButton(
@@ -54,11 +58,13 @@ class _CategoriaViewState extends State<CategoriaView> {
           ],
         ),
       ),
-
-      
+      //Fim barra Superior
 
       body:Container(
-        padding: EdgeInsets.all(20),
+
+        padding: EdgeInsets.all(20), //Margem
+
+          //Imagem/Textura de fundo do app
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -69,65 +75,85 @@ class _CategoriaViewState extends State<CategoriaView> {
               ),
             ),
           ),
+          //Fim Imagem/Textura de fundo do app
+
       
         child: Form(
+
           child: Column(
+
             children: [
-
+              
+              //Inicio icone principal
               Image.asset('lib/image/logoapp.png'),
-              //SizedBox(height: 150),
+              //Fim icone principal
+
+              //Botão Pizza Salgada
               ElevatedButton(
-                      style:ElevatedButton.styleFrom( 
-                        minimumSize: Size(350, 70),
-                        backgroundColor: Colors.white, 
-                        foregroundColor: Colors.red,
-                        textStyle: TextStyle(fontSize: 25),
-                      ),
+                style:ElevatedButton.styleFrom( 
+                  minimumSize: Size(350, 70),
+                  backgroundColor: Colors.white, 
+                  foregroundColor: Colors.red,
+                  textStyle: TextStyle(fontSize: 25),
+                ),
 
-                      onPressed: (){
-                        
-                        Navigator.pushNamed(context, 'cardapiosal');
-                        
-                      }, child: Text("Pizzas Salgada"),
-                    ),
-
-                    SizedBox(height: 50),
-
-                    ElevatedButton(
-                      style:ElevatedButton.styleFrom( 
-                        minimumSize: Size(350, 70),
-                        backgroundColor: Colors.white, 
-                        foregroundColor: Colors.red,
-                        textStyle: TextStyle(fontSize: 25),
-                      ),
-
-                      onPressed: (){
-                        
-                        Navigator.pushNamed(context, 'cardapiodoce');
-                        
-                      }, child: Text("Pizzas Doce"),
-                    ),
-
-                    SizedBox(height: 50),
+                onPressed: (){
                   
-                    ElevatedButton(
-                      style:ElevatedButton.styleFrom( 
-                        minimumSize: Size(350, 70),
-                        backgroundColor: Colors.white, 
-                        foregroundColor: Colors.red,
-                        textStyle: TextStyle(fontSize: 25),
-                      ),
+                  Navigator.pushNamed(context, 'cardapiosal');
+                  
+                }, child: Text("Pizzas Salgada"),
+              ),
+              //Fim Botão Salgada
 
-                      onPressed: (){
-                        
-                        Navigator.pushNamed(context, 'bebidas');
-                        
-                      }, child: Text("Bebidas"),
-                    ),
-            ],
+              SizedBox(height: 50),
+
+              //Botão Pizza Doce
+              ElevatedButton(
+                style:ElevatedButton.styleFrom( 
+                  minimumSize: Size(350, 70),
+                  backgroundColor: Colors.white, 
+                  foregroundColor: Colors.red,
+                  textStyle: TextStyle(fontSize: 25),
+                ),
+
+                onPressed: (){
+                  
+                  Navigator.pushNamed(context, 'cardapiodoce');
+                  
+                }, child: Text("Pizzas Doce"),
+              ),
+              //Botão Pizza Doce
+
+
+              SizedBox(height: 50),
+
+              //Botão Bebidas
+              ElevatedButton(
+                style:ElevatedButton.styleFrom( 
+                  minimumSize: Size(350, 70),
+                  backgroundColor: Colors.white, 
+                  foregroundColor: Colors.red,
+                  textStyle: TextStyle(fontSize: 25),
+                ),
+
+                onPressed: (){
+                  
+                  Navigator.pushNamed(context, 'bebidas');
+                  
+                }, child: Text("Bebidas"),
+              ),
+              //Botão Bebidas
+
+            ], //Children
+
           ),
+
         ),
+
       ),
+
     );
-  }
-}
+
+  } //Build
+
+} //Class

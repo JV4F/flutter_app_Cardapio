@@ -5,7 +5,7 @@ import 'package:flutter_app08/model/produto.dart';
 import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
 
-final ProdutoService srv = GetIt.instance<ProdutoService>();
+final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
 class DetalhessalView extends StatefulWidget {
   const DetalhessalView({super.key});
@@ -18,13 +18,16 @@ class _DetalhessalViewState extends State<DetalhessalView> {
   @override
   Widget build(BuildContext context) {
 
-    final Produto dadosSal = ModalRoute.of(context)!.settings.arguments as Produto;
+    final Produto dadosSal = ModalRoute.of(context)!.settings.arguments as Produto; //Dado Recebido de "cardapioSal_view"
 
     return Scaffold(
+      
+      //Backgraund para clarear a imagem/Textura utilizada 
       backgroundColor: Colors.green.shade700,
-
+      
+      //Barra Superior
       appBar: AppBar(
-        backgroundColor: Colors.red.shade900,
+        backgroundColor: Colors.red.shade900, //Cor barra superior
         
         //Seta para voltar
         leading: IconButton(
@@ -36,15 +39,19 @@ class _DetalhessalViewState extends State<DetalhessalView> {
         ),
         //Fim Seta
 
+        //Texto
         title: Text(
           'Detalhes',
           style: TextStyle(color: Colors.white),
           ),
+        //Fim Texto
+
       ),
       //Fim Barra Superior
 
       body: Container(
 
+        //Imagem/Textura de fundo do app
         decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -55,10 +62,11 @@ class _DetalhessalViewState extends State<DetalhessalView> {
               ),
             ),
           ),
+        // Fim Imagem/Textura de fundo do app
         
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(20), //Margem
 
-        child: ListView(
+        child: ListView( //Inicio ListView
 
           children: [
 
@@ -103,7 +111,7 @@ class _DetalhessalViewState extends State<DetalhessalView> {
             //Icone do carrinho
             //Foi colocado em uma row para que possamos editar o espaçamento horizontal
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end, //Espaçamento
               children: [
                 SizedBox(width: 280),
                 ElevatedButton(
@@ -114,22 +122,29 @@ class _DetalhessalViewState extends State<DetalhessalView> {
                       textStyle: TextStyle(fontSize: 20),
                     ),
                     
-                  onPressed:(){
+                  onPressed:(){ //Ação botão quando pressionado
                     
-                    //Navigator.pushNamed(context, 'carrinho');
+                    //Adiciona item ao carrinho e Valor total recebe o valor do produto
                     srv.carrinho.add(Produto(dadosSal.precoProd, dadosSal.nomeProd, dadosSal.descricaoProd, dadosSal.fotoProd));
                     srv.valorTotal += dadosSal.precoProd;
 
                  }, child: Text('+'),
+
                 )
-              ],
+
+              ], //Children
+
             ),
             //Fim Icone do carrinho
 
-          ],
+          ], //Children
+
         )
       
       ),
+
     );
-  }
-}
+
+  } //Build
+
+} //Class

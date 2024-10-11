@@ -1,6 +1,12 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, collection_methods_unrelated_type
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app08/service/usuario_servide.dart';
+import 'package:get_it/get_it.dart';
+
+final UsuarioService srv = GetIt.instance<UsuarioService>(); //Para que possamos usar o getIt dentro da tela
+
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -11,42 +17,56 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
+  //Atributos
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final msgKey = GlobalKey<ScaffoldMessengerState>();
-
   var email = TextEditingController();
   var senha = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade700,
-      appBar: AppBar(
-        backgroundColor: Colors.red.shade900,
 
-        leading: IconButton(
+      //Backgraund para clarear a imagem/Textura utilizada 
+      backgroundColor: Colors.green.shade700,
+
+      //Barra Superior
+      appBar: AppBar(
+        backgroundColor: Colors.red.shade900, //Cor barra superior
+
+        //Icone seta
+        leading: IconButton( 
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed:(){
             Navigator.popAndPushNamed(context, 'homepage');
           }, 
         ),
+        //Fim icone seta
 
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        title: Row( //Linha para poder espaçar o Texto do Icone
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Espaçamento
           children: [
+
+            //Texto
             Text(
               'Login',
               style: TextStyle(color: Colors.white),
             ),
+            //Fim Texto
 
+            //Logo barra superior
             Image.asset('lib/image/logoapp.png', height: 80),
+            //Fim logo barra superior
           ],
         ),
-        
       ),
+      //Fim Barra Superior
+
 
       body: Container(
+
+        //Imagem/Textura de fundo do app
         padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -58,6 +78,7 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
           ),
+        //Fim imagem/Textura de fundo do app
 
         child: Form(
 
@@ -67,7 +88,6 @@ class _LoginViewState extends State<LoginView> {
 
             children: [
                 
-              //Inicio icone principal
               Image.asset('lib/image/logoapp.png', height: 300),
               //Fim icone principal
 
@@ -101,6 +121,9 @@ class _LoginViewState extends State<LoginView> {
                       }
                       else if(email.isEmpty){
                         return 'Informe o Email';
+                      }
+                      if(!EmailValidator.validate(email)){
+                          return 'Informe um Email válido';
                       }
                       return null; 
                     }
@@ -145,7 +168,8 @@ class _LoginViewState extends State<LoginView> {
                   //Fim campo Senha
 
                   SizedBox(height: 10),
-
+                  
+                  //Esqueceu Senha
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -163,9 +187,11 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ],
                   ),
+                  //Fim Esqueceu senha
 
                   SizedBox(height: 30),
 
+                  //Botão Entrar
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(350, 60),
@@ -176,17 +202,73 @@ class _LoginViewState extends State<LoginView> {
                     onPressed:(){
 
                       if(formkey.currentState!.validate()){
-                        Navigator.popAndPushNamed(context, 'categoria');
+
+                        if(srv.usuario.isEmpty){
+                           ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Usuario não cadastrado!!', style: TextStyle(fontSize: 15)),
+                              duration: Duration(seconds: 3),
+                              backgroundColor: Colors.red,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(color: Colors.white, width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              
+                            )
+                          );
+                        }
+                        else if(srv.retornarUser(email.text) != null && email.text == srv.usuario[0].email && senha.text == srv.usuario[0].senha){
+                         Navigator.popAndPushNamed(context, 'categoria');
+                         ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Login feito com sucesso!!', style: TextStyle(fontSize: 15)),
+                              duration: Duration(seconds: 3),
+                              backgroundColor: Colors.red,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(color: Colors.white, width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              
+                            )
+                          );
+                        }
+                        else if(srv.usuario.isNotEmpty && email.text != srv.usuario[0].email || senha.text != srv.usuario[0].senha){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Email ou Senha Errado!!', style: TextStyle(fontSize: 15)),
+                              duration: Duration(seconds: 3),
+                              backgroundColor: Colors.red,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(color: Colors.white, width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            )
+                          );
+                        }
                       }
 
                     },child: Text('Entrar')
+
                   ),
-                ],
+                  //Fim botão entrar
+
+                ], //Children
+
               )
-            ],
+
+            ], //Children
+
           )
+
         ),
+
       ),
+
     );
-  }
-}
+
+  } //Build
+
+} //Class

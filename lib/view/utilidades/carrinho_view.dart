@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
 
-//Atualizando serviço ProdutoService
-final ProdutoService srv = GetIt.instance<ProdutoService>();
+final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
 class CarrinhoView extends StatefulWidget {
   const CarrinhoView({super.key});
@@ -16,6 +15,7 @@ class CarrinhoView extends StatefulWidget {
 
 class _CarrinhoViewState extends State<CarrinhoView> {
 
+  //Atributos
   var formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final msgKey = GlobalKey<ScaffoldMessengerState>();
@@ -25,9 +25,13 @@ class _CarrinhoViewState extends State<CarrinhoView> {
 
 
     return Scaffold(
+
+      //Backgraund para clarear a imagem/Textura utilizada
       backgroundColor: Colors.green.shade700,
+
+      //Barra Superior
       appBar: AppBar(
-        backgroundColor: Colors.red.shade900,
+        backgroundColor: Colors.red.shade900, //Cor barra superior
 
         //Seta para voltar
         leading: IconButton(
@@ -39,15 +43,18 @@ class _CarrinhoViewState extends State<CarrinhoView> {
         ),
         //Fim seta
 
-        title: Row(
+        title: Row( //Linha para poder espaçar o Texto do Icone
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Espaçamento
           children: [
+
+            //Texto
             Text(
               "Carrinho",
               style: TextStyle(color: Colors.white),
               ),
+            //Fim Texto
 
-              SizedBox(width: 165,),
-
+              //Icone Check
               IconButton(
                 icon: const Icon(Icons.check),
                 iconSize: 35,
@@ -58,13 +65,17 @@ class _CarrinhoViewState extends State<CarrinhoView> {
                   );
                 }
               )
+              //Fim Icone Check 
           ],
         ),
-
       ),
+      //Barra Superior
 
       body:Container(
-        padding: EdgeInsets.all(20),
+
+        padding: EdgeInsets.all(20), //Margem
+
+        //Imagem/Textura de fundo do app
         decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -75,14 +86,20 @@ class _CarrinhoViewState extends State<CarrinhoView> {
               ),
             ),
           ),
+        //Fim Imagem/Textura de fundo do app
+
+        //Criação do Listview
         child: ListView.builder(
           itemCount: srv.carrinho.length,
           itemBuilder: (context, index){
+
             return Column(
+
               children: [
+
                 Card(
                         
-                  child: ListTile(
+                  child: ListTile( //Inicio ListTile
                   
                     //Exibe image do produto no cardapio
                     leading: Image.asset(srv.carrinho[index].fotoProd),
@@ -123,11 +140,14 @@ class _CarrinhoViewState extends State<CarrinhoView> {
                         
                       },
                     ),
+                    //Fim Icone seta no produto
+
                 
                   ),
                   
                 ),
-              ],
+
+              ], //Children
 
             );
               
@@ -139,6 +159,6 @@ class _CarrinhoViewState extends State<CarrinhoView> {
 
     );
 
-  }
+  } //Builder
 
-}
+} //Class

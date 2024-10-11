@@ -10,29 +10,36 @@ class HomePageView extends StatefulWidget {
 }
 
 class _HomePageViewState extends State<HomePageView> {
- 
+
+
+  //Atributos
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final msgKey = GlobalKey<ScaffoldMessengerState>();
-
-    var email = TextEditingController(); 
-    var senha = TextEditingController(); 
-    bool stats = false; 
+  var email = TextEditingController(); 
+  var senha = TextEditingController(); 
+  bool stats = false; 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      //Backgraund para clarear a imagem/Textura utilizada 
       backgroundColor: Colors.green.shade700,
 
         //Barra De Cima
-        appBar: AppBar(
-            backgroundColor: Colors.red.shade900,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        appBar: AppBar( 
+            backgroundColor: Colors.red.shade900, //Cor barra superior
+
+            title: Row( //Linha para poder espaçar o Texto do Icone
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Espaçamento
               children: [
+
+                //Texto
                 Text(
                   'Italian Pizza',
                  style: TextStyle(color: Colors.white),
                 ),
+                //Fim Texto
 
                 //Icone do AppBar
                  Image.asset('lib/image/logoapp.png', height: 80),
@@ -44,6 +51,8 @@ class _HomePageViewState extends State<HomePageView> {
           //Fim barra cima
 
         body: Container(
+
+          //Imagem/Textura de fundo do app
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -55,6 +64,7 @@ class _HomePageViewState extends State<HomePageView> {
               ),
             ),
           ),
+        //Fim imagem/Textura de fundo do app
 
           child: Form(
 
@@ -66,19 +76,14 @@ class _HomePageViewState extends State<HomePageView> {
 
               children: [
 
-                
-                
                 //Inicio Icone Principal
                 Column(
                   children: [
-                    
                     Image.asset('lib/image/logoapp.png',height: 500,),
                   ],
                 ),
-                //SizedBox(height: 20), //Espaçamento
-               // Row(), // Não sei explicar, mas é isso que mantem os widgets centralizados horizontalmente
+                //Fim Icone Principal
 
-                //SizedBox(height: 10), //Espaçamento
 
                 Column(
 
@@ -135,7 +140,7 @@ class _HomePageViewState extends State<HomePageView> {
 
     );
 
-  }
+  } //Build
 
-}
+} //Class
    

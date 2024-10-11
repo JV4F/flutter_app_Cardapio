@@ -5,25 +5,29 @@ import 'package:flutter_app08/model/produto.dart';
 import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
 
-final ProdutoService srv = GetIt.instance<ProdutoService>();
+final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
 class DetalhesdoceViewA extends StatefulWidget {
   const DetalhesdoceViewA({super.key});
 
   @override
-  State<DetalhesdoceViewA> createState() => _DetalhesdoceViewAState();
+  State<DetalhesdoceViewA> createState() => _DetalhesdoceViewAState(); 
 }
 
 class _DetalhesdoceViewAState extends State<DetalhesdoceViewA> {
   @override
   Widget build(BuildContext context) {
 
-    final Produto dadosdoce = ModalRoute.of(context)!.settings.arguments as Produto;
+    final Produto dadosdoce = ModalRoute.of(context)!.settings.arguments as Produto; //Dado Recebido de "cardapioDoce_view"
 
     return Scaffold(
+
+      //Backgraund para clarear a imagem/Textura utilizada 
       backgroundColor: Colors.green.shade700,
+
+      //Barra Superior
       appBar: AppBar(
-        backgroundColor: Colors.red.shade900,
+        backgroundColor: Colors.red.shade900, //Cor barra superior
         
         //Seta para voltar
         leading: IconButton(
@@ -35,14 +39,19 @@ class _DetalhesdoceViewAState extends State<DetalhesdoceViewA> {
         ),
         //Fim Seta
 
+        //Texto
         title: Text(
           'Detalhes',
           style: TextStyle(color: Colors.white),
           ),
+        //Fim Texto
+
       ),
       //Fim Barra Superior
 
       body: Container(
+
+        //Imagem/Textura de fundo do app
         decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -53,10 +62,11 @@ class _DetalhesdoceViewAState extends State<DetalhesdoceViewA> {
               ),
             ),
           ),
+        // Fim Imagem/Textura de fundo do app
         
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(20), //Margem
 
-        child: ListView(
+        child: ListView( //Inicio ListView
 
           children: [
 
@@ -88,7 +98,6 @@ class _DetalhesdoceViewAState extends State<DetalhesdoceViewA> {
             ListTile(
               title: Text(
                 'Preço:  R¢'
-                //'${dados.precoProd.toStringAsFixed(2)}',
                 '${dadosdoce.precoProd.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 20),
                 
@@ -101,7 +110,7 @@ class _DetalhesdoceViewAState extends State<DetalhesdoceViewA> {
             //Icone do carrinho
             //Foi colocado em uma row para que possamos editar o espaçamento horizontal
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end, //Espaçamento
               children: [
                 SizedBox(width: 280),
                 ElevatedButton(
@@ -112,22 +121,29 @@ class _DetalhesdoceViewAState extends State<DetalhesdoceViewA> {
                       textStyle: TextStyle(fontSize: 20),
                     ),
                     
-                  onPressed:(){
+                  onPressed:(){ //Ação botão quando pressionado
                     
-                    //Navigator.pushNamed(context, 'carrinho');
+                    //Adiciona item ao carrinho e Valor total recebe o valor do produto
                     srv.carrinho.add(Produto(dadosdoce.precoProd, dadosdoce.nomeProd, dadosdoce.descricaoProd, dadosdoce.fotoProd));
                     srv.valorTotal += dadosdoce.precoProd;
 
                  }, child: Text('+'),
+
                 )
-              ],
+
+              ], //Children
+              
             ),
             //Fim Icone do carrinho
 
-          ],
+          ], //Children
+
         )
       
       ),
+
     );
-  }
-}
+
+  } //Build
+
+} //Class
