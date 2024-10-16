@@ -34,7 +34,7 @@ class _CadastroViewState extends State<CadastroView> {
   @override
    Widget build(BuildContext context) {
 
-    srv.usuario.length = 0; //Definindo o tamanho da lista usuario pra 0
+    //srv.usuario.length = 0; //Definindo o tamanho da lista usuario pra 0
     
     return Scaffold(
 
@@ -339,15 +339,15 @@ class _CadastroViewState extends State<CadastroView> {
                           if(senha.text != confirmaSenha.text){
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                              content: Text('Senhas não coincidem!!', style: TextStyle(fontSize: 15)),
-                              duration: Duration(seconds: 3),
-                              backgroundColor: Colors.red,
-                              behavior: SnackBarBehavior.floating,
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(color: Colors.white, width: 2),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            )
+                                content: Text('Senhas não coincidem!!', style: TextStyle(fontSize: 15)),
+                                duration: Duration(seconds: 3),
+                                backgroundColor: Colors.red,
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(color: Colors.white, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              )
                             );
                           }
                         }

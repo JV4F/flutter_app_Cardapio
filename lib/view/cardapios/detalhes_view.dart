@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app08/model/produto.dart';
@@ -7,24 +7,24 @@ import 'package:get_it/get_it.dart';
 
 final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
-class DetalhesbebidasView extends StatefulWidget {
-  const DetalhesbebidasView({super.key});
+class DetalhessalView extends StatefulWidget {
+  const DetalhessalView({super.key});
 
   @override
-  State<DetalhesbebidasView> createState() => _DetalhesbebidasViewState();
+  State<DetalhessalView> createState() => _DetalhessalViewState();
 }
 
-class _DetalhesbebidasViewState extends State<DetalhesbebidasView> {
+class _DetalhessalViewState extends State<DetalhessalView> {
   @override
   Widget build(BuildContext context) {
 
-    final Produto dadosBebidas = ModalRoute.of(context)!.settings.arguments as Produto; //Dado Recebido de "bebidas_view"
+    final Produto dadosSal = ModalRoute.of(context)!.settings.arguments as Produto; //Dado Recebido de "cardapioSal_view"
 
     return Scaffold(
       
       //Backgraund para clarear a imagem/Textura utilizada 
       backgroundColor: Colors.green.shade700,
-
+      
       //Barra Superior
       appBar: AppBar(
         backgroundColor: Colors.red.shade900, //Cor barra superior
@@ -71,56 +71,57 @@ class _DetalhesbebidasViewState extends State<DetalhesbebidasView> {
           children: [
 
             //Exibir Foto
-            Image.asset(dadosBebidas.fotoProd),
+            Image.asset(dadosSal.fotoProd),
 
             //Exibe Nome Produto no detalhe
             ListTile(
               title: Text(
-                dadosBebidas.nomeProd,
+                dadosSal.nomeProd,
                 style: TextStyle(fontSize: 30),
               ),
             ),
-            //Fim exibe Nome Produto no detalhe
-
 
             SizedBox(height: 10), // Espaçamento
 
             //Exibe Descrição do produto no detalhe
             ListTile(
               subtitle: Text(
-                //dados.descricaoProd,
-                dadosBebidas.descricaoProd,
-                style: TextStyle(fontSize: 20),
+                dadosSal.descricaoProd,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
               ),
             ),
-            //Fim exibe Descrição do produto no detalhe
-
 
             SizedBox(height: 10), //Espaçamento
 
             //Exibe Preço do produto no detalhe
             ListTile(
               title: Text(
-                'Preço:  R¢'
-                '${dadosBebidas.precoProd.toStringAsFixed(2)}',
-                style: TextStyle(fontSize: 20),
+                'Preço:  R\$'
+                '${dadosSal.precoProd.toStringAsFixed(2)}',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
                 
               ),
             ),
-            //Fim exibe Preço do produto no detalhe
-
 
             SizedBox(height: 30), //Espaçamento
 
-            //Icone Carrinho
-            Row( //Foi colocado em uma row para que possamos editar o espaçamento horizontal
+
+            //Icone do carrinho
+            //Foi colocado em uma row para que possamos editar o espaçamento horizontal
+            Row(
               mainAxisAlignment: MainAxisAlignment.end, //Espaçamento
               children: [
                 SizedBox(width: 280),
-                ElevatedButton( //Botão
+                ElevatedButton(
                    style: ElevatedButton.styleFrom(
                       minimumSize: Size(10, 50),
-                      backgroundColor: Colors.purple.shade900,
+                      backgroundColor: Colors.red.shade900,
                       foregroundColor: Colors.white,
                       textStyle: TextStyle(fontSize: 20),
                     ),
@@ -128,8 +129,21 @@ class _DetalhesbebidasViewState extends State<DetalhesbebidasView> {
                   onPressed:(){ //Ação botão quando pressionado
                     
                     //Adiciona item ao carrinho e Valor total recebe o valor do produto
-                    srv.carrinho.add(Produto(dadosBebidas.precoProd, dadosBebidas.nomeProd, dadosBebidas.descricaoProd, dadosBebidas.fotoProd));
-                    srv.valorTotal += dadosBebidas.precoProd;
+                    srv.carrinho.add(Produto(dadosSal.precoProd, dadosSal.nomeProd, dadosSal.descricaoProd, dadosSal.fotoProd));
+                    srv.valorTotal += dadosSal.precoProd;
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Produto adicionado com sucesso!!', style: TextStyle(fontSize: 15)),
+                                duration: Duration(seconds: 3),
+                                backgroundColor: Colors.red,
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(color: Colors.white, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              )
+                            );
 
                  }, child: Text('+'),
 
