@@ -18,6 +18,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
 
   //Atributos
+  final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final msgKey = GlobalKey<ScaffoldMessengerState>();
   var email = TextEditingController();
@@ -202,8 +203,8 @@ class _LoginViewState extends State<LoginView> {
                     onPressed:(){
 
                       if(formkey.currentState!.validate()){
-
-                        if(srv.usuario.isEmpty){
+                        final user = srv.retornarUser(email.text);
+                        if(user == null){
                            ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('Usuario não cadastrado!!', style: TextStyle(fontSize: 15)),
@@ -218,8 +219,8 @@ class _LoginViewState extends State<LoginView> {
                             )
                           );
                         }
-                        else if(srv.retornarUser(email.text) != null && email.text == srv.usuario[0].email && senha.text == srv.usuario[0].senha){
-                         Navigator.popAndPushNamed(context, 'categoria');
+                        else if(user.email == email.text && user.senha == senha.text){
+                         Navigator.popAndPushNamed(context, 'categoria'); 
                          ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('Login feito com sucesso!!', style: TextStyle(fontSize: 15)),
@@ -234,7 +235,7 @@ class _LoginViewState extends State<LoginView> {
                             )
                           );
                         }
-                        else if(srv.usuario.isNotEmpty && email.text != srv.usuario[0].email || senha.text != srv.usuario[0].senha){
+                        else if(user.email != email.text || user.senha != senha.text){
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('Email ou Senha Errado!!', style: TextStyle(fontSize: 15)),

@@ -25,6 +25,8 @@ class _CadastroViewState extends State<CadastroView> {
   final msgKey = GlobalKey<ScaffoldMessengerState>();
   var nome = TextEditingController();
   var email = TextEditingController();
+  var telefone= TextEditingController();
+  var endereco = TextEditingController();
   var senha = TextEditingController();
   var confirmaSenha = TextEditingController();
 
@@ -99,7 +101,7 @@ class _CadastroViewState extends State<CadastroView> {
             children: [
                 
                 //Inicio icone principal
-                Image.asset('lib/image/logoapp.png', height: 300),
+                Image.asset('lib/image/logoapp.png', height: 135),
                 //Fim icone principal
 
                 Column(
@@ -177,39 +179,98 @@ class _CadastroViewState extends State<CadastroView> {
                     ),
                     //Fim campo Email
 
+                    SizedBox(height: 20),
+
+                    //Campo Telefone
+                    TextFormField(
+                      controller: telefone,
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.red.shade900),
+                        ),
+                        iconColor: Colors.white,
+                        icon: Icon(Icons.phone),
+                        labelText: 'Tel: ',
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintText: 'Informe o Telefone',
+                      ),
+                      validator: (telefone) {
+                        if (telefone == null || telefone.isEmpty) {
+                          return 'Informe o Telefone';
+                        } else if (!RegExp(r'^\d{7}-\d{4}$').hasMatch(telefone) && !RegExp(r'^\d{11}$').hasMatch(telefone)) {
+                          return 'Telefone inválido. Use o formato (00)12345-6789. ';
+                        }
+                        return null; 
+                      },
+                    ),
+                    //Fim campo Telefone
+                    SizedBox(height: 20),
+
+                    //Campo Endereço
+                    TextFormField(
+                      controller: endereco,
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.red.shade900),
+                        ),
+                        iconColor: Colors.white,
+                        icon: Icon(Icons.location_on_outlined),
+                        labelText: 'CEP: ',
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintText: 'Informe o CEP',
+                      ),
+                      validator: (endereco) {
+                        if (endereco == null || endereco.isEmpty) {
+                          return 'Informe o CEP';
+                        } else if (!RegExp(r'^\d{5}-\d{3}$').hasMatch(endereco) && !RegExp(r'^\d{8}$').hasMatch(endereco)) {
+                          return 'CEP inválido. Use o formato 12345-678 ou 12345678.';
+                        }
+                        return null; 
+                      },
+                    ),
+                    //Fim campo Endereço
+
                     SizedBox(height: 20), // Espaçamento
 
                     //Campo Senha
-                    TextFormField(
+                     TextFormField(
                       controller: senha,
                       cursorColor: Colors.red,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.white),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.red.shade900)
+                          borderSide: BorderSide(color: Colors.red.shade900),
                         ),
-                        
                         iconColor: Colors.white,
                         icon: Icon(Icons.key),
                         labelText: 'Senha: ',
                         labelStyle: TextStyle(color: Colors.white),
                         hintText: 'Informe a Senha',
                       ),
-
-                      validator: (senha){
-                        if(senha == null){
-                          return 'informe o Senha';
-                        }
-                        else if(senha.isEmpty){
-                          return 'informe o Senha';
+                      validator: (senha) {
+                        if (senha == null || senha.isEmpty) {
+                          return 'Informe a sennha';
+                        } else if (!RegExp(r'^\d{6}$').hasMatch(senha) && !RegExp(r'^\d{8}$').hasMatch(senha)) {
+                          return 'Senha inválida. Minimo 6 digitos e maximo 8 digitos';
                         }
                         return null; 
-                      }
-
+                      },
                     ),
                     //Fim campo Senha
 
@@ -217,35 +278,31 @@ class _CadastroViewState extends State<CadastroView> {
 
                     //Campo confirma Senha
                     TextFormField(
-                    controller: confirmaSenha,
-                    cursorColor: Colors.red,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)
+                      controller: confirmaSenha,
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.red.shade900),
+                        ),
+                        iconColor: Colors.white,
+                        icon: Icon(Icons.key),
+                        labelText: 'Senha: ',
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintText: 'Informe a Senha',
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.red.shade900)
-                      ),
-                      
-                      iconColor: Colors.white,
-                      icon: Icon(Icons.key),
-                      labelText: 'Confirmar Senha: ',
-                      labelStyle: TextStyle(color: Colors.white),
-                      hintText: 'Confirme a Senha',
-                    ),
-
-                      validator: (confirmaSenha){
-                        if(confirmaSenha == null){
-                          return 'Confirme o Senha';
-                        }
-                        else if(confirmaSenha.isEmpty){
-                          return 'Confirme o Senha';
+                      validator: (confirmasenha) {
+                        if (confirmasenha == null || confirmasenha.isEmpty) {
+                          return 'Informe a sennha';
+                        } else if (!RegExp(r'^\d{6}$').hasMatch(confirmasenha) && !RegExp(r'^\d{8}$').hasMatch(confirmasenha )) {
+                          return 'Senha inválida. Minimo 6 digitos e maximo 8 digitos';
                         }
                         return null; 
-                      }
-
+                      },
                     ),
                     //Fim campo confirma Senha
 
@@ -263,7 +320,7 @@ class _CadastroViewState extends State<CadastroView> {
 
                         if(formkey.currentState!.validate()){
                           if(senha.text == confirmaSenha.text){
-                            srv.adicionarUser(Usuario(nome.text, email.text, senha.text, confirmaSenha.text));
+                            srv.usuario.add(Usuario(nome.text, email.text, telefone.text, endereco.text, senha.text, confirmaSenha.text));
                             Navigator.popAndPushNamed(context, 'categoria');
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
