@@ -77,24 +77,21 @@ class _DetalhessalViewState extends State<DetalhessalView> {
             ListTile(
               title: Text(
                 dadosSal.nomeProd,
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 26),
               ),
             ),
 
-            SizedBox(height: 10), // Espaçamento
-
-            //Exibe Descrição do produto no detalhe
-            ListTile(
+           ListTile(
               subtitle: Text(
                 dadosSal.descricaoProd,
-                style: TextStyle(
-                  fontSize: 20,
+                  style: TextStyle(
+                  fontSize: 18,
                   color: Colors.white,
-                ),
+                  ),
+                textAlign: TextAlign.justify, // Alinha o texto de forma justificada
               ),
             ),
-
-            SizedBox(height: 10), //Espaçamento
+ 
 
             //Exibe Preço do produto no detalhe
             ListTile(
@@ -109,7 +106,7 @@ class _DetalhessalViewState extends State<DetalhessalView> {
               ),
             ),
 
-            SizedBox(height: 30), //Espaçamento
+            //SizedBox(height: 30), //Espaçamento
 
 
             //Icone do carrinho

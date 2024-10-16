@@ -56,130 +56,130 @@ void main() {
   // PIZZAS SALGADAS
   //
   srv.salgada.add(Produto(65, 'Brocolis com Bacon',
-  'asfaff',
+  'Massa crocante, molho de tomate fresco, queijo derretido, pedaços de brócolis levemente salteados e fatias de bacon crocante. Uma combinação perfeita de sabores suaves e defumados!',
   'lib/image/salgada_brocolis_bacon.jpg'));
 
   srv.salgada.add(Produto(60, 'Calabresa',
-  'asfaff',
+  'Massa crocante, molho de tomate caseiro, queijo derretido e fatias generosas de calabresa levemente picante. Uma combinação clássica e saborosa que agrada todos os paladares!',
   'lib/image/salgada_calabresa.jpg'));
 
   srv.salgada.add(Produto(70, 'Frango com catupiry',
-  'sufuvb',
+  'Massa crocante, molho de tomate suave, frango desfiado temperado e uma generosa camada de cremoso catupiry. Sabor irresistível e super cremoso!',
   'lib/image/salgada_frango_catupiry.jpg'));
 
   srv.salgada.add(Produto(65, 'Marguerita',
-  'sufuvb',
+  'Massa crocante, molho de tomate artesanal, fatias de tomate fresco, queijo muçarela derretido e folhas de manjericão. Um clássico leve e refrescante!',
   'lib/image/salgada_marguerita.jpg'));
 
-  srv.salgada.add(Produto(60, 'Mussarela',
-  'sufuvb',
+  srv.salgada.add(Produto(60, 'Muçarela',
+  'Massa crocante, molho de tomate fresco e uma generosa camada de queijo muçarela derretido. Simples, deliciosa e cheia de sabor!',
   'lib/image/salgada_mussarela.jpg'));
 
   srv.salgada.add(Produto(60, 'Tomate Cereja',
-  'sufuvb',
+  'Massa crocante, molho de tomate caseiro, queijo muçarela e suculentas fatias de tomate cereja, trazendo frescor e leveza a cada mordida.',
   'lib/image/salgada_tomate_cereja.jpg'));
 
   srv.salgada.add(Produto(65, 'Doritos',
-  'sufuvb',
+  'Massa crocante, molho de tomate, queijo muçarela derretido e uma camada crocante de Doritos, trazendo um toque divertido e crocante para sua pizza!',
   'lib/image/salgada_doritos.jpg'));
 
   srv.salgada.add(Produto(95, 'Filé Mignon',
-  'sufuvb',
+  'Massa crocante, molho de tomate artesanal, pedaços suculentos de filé mignon e uma generosa camada de queijo derretido. Sabor sofisticado e delicioso!',
   'lib/image/salgada_file_mignon.jpg'));
 
   srv.salgada.add(Produto(85, 'Camarão',
-  'sufuvb',
+  'Massa crocante, molho de tomate suave, camarões temperados e queijo derretido, formando uma combinação de sabores marcantes e irresistíveis!',
   'lib/image/salgada_camarao.jpg'));
 
   srv.salgada.add(Produto(80, 'Carne Seca',
-  'sufuvb',
+  'Massa crocante, molho de tomate caseiro, carne seca desfiada e queijo derretido. Uma combinação tradicional e saborosa com um toque regional!',
   'lib/image/salgada_carne_seca.jpg'));
 
   srv.salgada.add(Produto(65, 'Milho',
-  'sufuvb',
+  'Massa crocante, molho de tomate, queijo derretido e grãos de milho doces e suculentos, criando uma pizza leve e com sabor especial.',
   'lib/image/salgada_milho.jpg'));
 
   srv.salgada.add(Produto(70, 'Portuguesa',
-  'sufuvb',
+  'Massa crocante, molho de tomate, queijo muçarela, presunto, ovos cozidos, cebola e azeitonas. Uma mistura clássica e completa de sabores!',
   'lib/image/salgada_portuguesa.jpg'));
 
 
   // PIZZAS DOCES
   srv.doce.add(Produto(60, 'Banana com doce de leite',
-  'asfaff',
+  'Massa crocante, fatias de banana maduras e uma generosa camada de doce de leite cremoso. Uma sobremesa irresistível e doce na medida certa!',
   'lib/image/doce_banana_doce_leitte.jpg',));
 
   srv.doce.add(Produto(55, 'Chocolate', 
-  'abdiubgud',
+  'Massa crocante, coberta com uma camada espessa de chocolate ao leite derretido. Uma explosão de sabor para os amantes de chocolate!',
   'lib/image/doce_chocolate.jpg'));
 
-    srv.doce.add(Produto(60, 'Chocolate com morango',
-  'asfaff',
+  srv.doce.add(Produto(60, 'Chocolate com morango',
+  'Massa crocante, chocolate ao leite derretido e pedaços frescos de morango. Uma combinação clássica e deliciosa de doce e azedinho!',
   'lib/image/doce_chocolate_morango.jpg',));
 
-    srv.doce.add(Produto(60, 'Churros',
-  'asfaff',
+  srv.doce.add(Produto(60, 'Churros',
+  'Massa crocante, coberta com doce de leite e finalizada com açúcar e canela. Um sabor autêntico de churros em cada fatia!',
   'lib/image/doce_churros.jpg',));
 
-    srv.doce.add(Produto(65, 'Floresta negra',
-  'asfaff',
+  srv.doce.add(Produto(65, 'Floresta negra',
+  'Massa crocante, recheada com chocolate, chantilly e cerejas. Inspirada na clássica sobremesa, essa pizza é uma combinação perfeita de sabores ricos!',
   'lib/image/doce_floresta_negra.jpg',));
 
-    srv.doce.add(Produto(70, 'KitKat',
-  'asfaff',
+  srv.doce.add(Produto(70, 'KitKat',
+  'Massa crocante, uma camada generosa de chocolate ao leite derretido e pedaços crocantes de KitKat por cima. A crocância e o sabor do chocolate em cada mordida!',
   'lib/image/doce_kitkat.jpg',));
 
-    srv.doce.add(Produto(75, 'Ninho com uvas',
-  'asfaff',
+  srv.doce.add(Produto(75, 'Ninho com uvas',
+  'Massa crocante, cobertura de leite em pó e uvas frescas e suculentas. Uma combinação suave e irresistível de sabores doces e frutados!',
   'lib/image/doce_ninho_uva.jpg',));
 
-    srv.doce.add(Produto(65, 'Prestígio',
-  'asfaff',
+  srv.doce.add(Produto(65, 'Prestígio',
+  'Massa crocante, recheada com chocolate ao leite derretido e coco ralado. A famosa combinação de chocolate e coco em formato de pizza!',
   'lib/image/doce_prestigio.jpg',));
 
-    srv.doce.add(Produto(60, 'Romeu e Julieta',
-  'asfaff',
+  srv.doce.add(Produto(60, 'Romeu e Julieta',
+  'Massa crocante, com uma camada de queijo cremoso e generosas porções de goiabada derretida. O contraste perfeito entre o doce e o salgado!',
   'lib/image/doce_romeu_julieta.jpg',));
 
   //BEBIDAS
   srv.bebida.add(Produto(9.50, 'Coca-Cola',
-  'asfaff',
+  'Lata de Coca-Cola gelada, 350ml, perfeita para refrescar e acompanhar qualquer refeição!',
   'lib/image/bebida_coca.jpg'));
 
   srv.bebida.add(Produto(7.50, 'Água',
-  'asfaff',
+  'Água mineral pura e refrescante, em garrafa de vidro de 500ml. Ideal para hidratação com elegância.',
   'lib/image/bebida_agua.jpg'));
 
   srv.bebida.add(Produto(18, 'Caipirinha',
-  'asfaff',
+  'Caipirinha clássica, feita com limão fresco, açúcar e cachaça de qualidade. A bebida perfeita para quem ama sabores brasileiros!',
   'lib/image/bebida_caipirinha.jpg'));
 
-  srv.bebida.add(Produto(80, 'Espumante',
-  'asfaff',
+  srv.bebida.add(Produto(160, 'Espumante',
+  'Garrafa de 750ml de Chandon Brut Rosé, espumante sofisticado com sabor delicado e refrescante. Ideal para celebrações!',
   'lib/image/bebida_espumante.jpg'));
 
   srv.bebida.add(Produto(9.50, 'Guaraná',
-  'asfaff',
+  'Lata de Guaraná Antarctica, 350ml. Sabor brasileiro autêntico, refrescante e levemente doce.',
   'lib/image/bebida_guarana.jpg'));
 
   srv.bebida.add(Produto(13, 'Suco de laranja',
-  'asfaff',
+  'Suco de laranja natural e fresco, em garrafa de 500ml. Sabor cítrico e nutritivo para acompanhar sua refeição!',
   'lib/image/bebida_suco_laranja.jpg'));
 
-    srv.bebida.add(Produto(13, 'Suco de limão',
-  'asfaff',
+  srv.bebida.add(Produto(13, 'Suco de limão',
+  'Suco de limão puro e refrescante, em garrafa de 500ml. Perfeito para quem busca uma bebida cítrica e revigorante.',
   'lib/image/bebida_suco_limao.jpg'));
 
-    srv.bebida.add(Produto(15, 'Suco de morango',
-  'asfaff',
+  srv.bebida.add(Produto(15, 'Suco de morango',
+  'Suco de morango fresco, em garrafa de 500ml. Doce e natural, ideal para uma pausa saborosa!',
   'lib/image/bebida_suco_morango.jpg'));
 
-    srv.bebida.add(Produto(120, 'Vinho seco',
-  'asfaff',
+  srv.bebida.add(Produto(120, 'Vinho branco seco',
+  'Garrafa de 750ml de vinho branco seco Casillero del Diablo. Refinado e ideal para momentos especiais.',
   'lib/image/bebida_vinho_seco.jpg'));
 
-    srv.bebida.add(Produto(100, 'Vinho tinto',
-  'asfaff',
+  srv.bebida.add(Produto(100, 'Vinho tinto suave',
+  'Garrafa de 750ml de vinho tinto suave Casillero del Diablo. Equilibrado e perfeito para quem aprecia um sabor mais adocicado.',
   'lib/image/bebida_vinho_tinto.jpg'));
 
   runApp(
