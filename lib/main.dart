@@ -24,7 +24,9 @@ Pasta "bebidas": fica o cardapio e os detalhes das bebidas
 */
 
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app08/firebase_options.dart';
 import 'package:flutter_app08/model/produto.dart';
 import 'package:flutter_app08/service/produto_service.dart';
 import 'package:flutter_app08/service/usuario_servide.dart';
@@ -44,7 +46,11 @@ import 'package:get_it/get_it.dart';
 //Inicialização do getIT
 final getIt = GetIt.instance; 
 
-void main() {
+Future<void> main() async {
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
 
   //Para que possamos atrelar o getIt ao UsuarioService
   getIt.registerSingleton<UsuarioService>(UsuarioService());
