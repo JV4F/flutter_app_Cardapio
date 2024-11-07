@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,6 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
 
   //Atributos
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  final msgKey = GlobalKey<ScaffoldMessengerState>();
   var email = TextEditingController();
   var confirmaEmail = TextEditingController();
 
@@ -55,9 +54,8 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
 
       body: Container(
 
-        padding: EdgeInsets.all(20), //Margem
-
         //Imagem/Textura de fundo do app
+        width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -80,8 +78,9 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
             children: [
                 
               //Inicio icone principal
-              Image.asset('lib/image/logoapp.png', height: 300),
-              SizedBox(height: 20),             
+              Image.asset('lib/image/logoapp.png',
+                height: MediaQuery.of(context).size.height * .3,
+              ),
               //Fim icone principal
 
               Column(
@@ -89,122 +88,134 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
                 children: [
 
                   //Campo Email
-                  TextFormField(
-                    controller: email,
-                    cursorColor: Colors.red,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)
+                  Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    height: MediaQuery.of(context).size.height * .09,
+                    child: TextFormField(
+                      controller: email,
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.red.shade900)
+                        ),
+                        iconColor: Colors.white,
+                        icon: Icon(Icons.mail),
+                        labelText: 'Email: ',
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintText: 'Informe o Email',
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.red.shade900)
-                      ),
-                      iconColor: Colors.white,
-                      icon: Icon(Icons.mail),
-                      labelText: 'Email: ',
-                      labelStyle: TextStyle(color: Colors.white),
-                      hintText: 'Informe o Email',
+                    
+                      validator: (email){
+                        if(email == null){
+                          return 'Informe o Email';
+                        }
+                        else if(email.isEmpty){
+                          return 'Informe o Email';
+                        }
+                        if(!EmailValidator.validate(email)){
+                            return 'Informe um Email válido';
+                        }
+                        return null; 
+                      }
+                    
                     ),
-
-                    validator: (email){
-                      if(email == null){
-                        return 'Informe o Email';
-                      }
-                      else if(email.isEmpty){
-                        return 'Informe o Email';
-                      }
-                      if(!EmailValidator.validate(email)){
-                          return 'Informe um Email válido';
-                      }
-                      return null; 
-                    }
-
                   ),
                   //Fim campo Email
 
-                    SizedBox(height: 30), // Espaçamento
+                    SizedBox(height: 20), // Espaçamento
 
                   //Campo Senha
-                  TextFormField(
-                    controller: confirmaEmail,
-                    cursorColor: Colors.red,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)
+                  Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    height: MediaQuery.of(context).size.height * .09,
+                    child: TextFormField(
+                      controller: confirmaEmail,
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.red.shade900)
+                        ),
+                        
+                        iconColor: Colors.white,
+                        icon: Icon(Icons.mail),
+                        labelText: 'Confirme o Email',
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintText: 'Informe o Email',
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.red.shade900)
-                      ),
-                      
-                      iconColor: Colors.white,
-                      icon: Icon(Icons.mail),
-                      labelText: 'Confirme o Email',
-                      labelStyle: TextStyle(color: Colors.white),
-                      hintText: 'Informe o Email',
+                    
+                      validator: (senha){
+                        if(senha == null){
+                          return 'Confirme o Email';
+                        }
+                        else if(senha.isEmpty){
+                          return 'Confirme o Email';
+                        }
+                        return null; 
+                      }
+                    
                     ),
-
-                    validator: (senha){
-                      if(senha == null){
-                        return 'Confirme o Email';
-                      }
-                      else if(senha.isEmpty){
-                        return 'Confirme o Email';
-                      }
-                      return null; 
-                    }
-
                   ),
                   //Fim campo Senha
 
-                  SizedBox(height: 80),
+                  SizedBox(height: 20),
 
                   //Botão Enviar
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(350, 60),
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.red,
-                      textStyle: TextStyle(fontSize: 25),
+                  Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    height: MediaQuery.of(context).size.height * .08,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(350, 60),
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.red,
+                        textStyle: TextStyle(fontSize: 25),
+                      ),
+                      onPressed:(){
+                    
+                        if(formkey.currentState!.validate()){
+                          if(confirmaEmail.text == email.text){
+                            Navigator.popAndPushNamed(context, 'login');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Solicitação enviada!!', style: TextStyle(fontSize: 15)),
+                                duration: Duration(seconds: 3),
+                                backgroundColor: Colors.red,
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(color: Colors.white, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              )
+                            );
+                          }
+                          else if(confirmaEmail.text != email.text){
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Emails não coincidem!!', style: TextStyle(fontSize: 15)),
+                                duration: Duration(seconds: 3),
+                                backgroundColor: Colors.red,
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(color: Colors.white, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              )
+                            );
+                          }
+                        } 
+                    
+                      },child: Text('Enviar')
                     ),
-                    onPressed:(){
-
-                      if(formkey.currentState!.validate()){
-                        if(confirmaEmail.text == email.text){
-                          Navigator.popAndPushNamed(context, 'login');
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Solicitação enviada!!', style: TextStyle(fontSize: 15)),
-                              duration: Duration(seconds: 3),
-                              backgroundColor: Colors.red,
-                              behavior: SnackBarBehavior.floating,
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(color: Colors.white, width: 2),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            )
-                          );
-                        }
-                        else if(confirmaEmail.text != email.text){
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Emails não coincidem!!', style: TextStyle(fontSize: 15)),
-                              duration: Duration(seconds: 3),
-                              backgroundColor: Colors.red,
-                              behavior: SnackBarBehavior.floating,
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(color: Colors.white, width: 2),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            )
-                          );
-                        }
-                      } 
-
-                    },child: Text('Enviar')
                   ),
                   //Fim Botão Enviar
 

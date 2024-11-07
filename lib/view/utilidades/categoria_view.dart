@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app08/service/produto_service.dart';
@@ -62,9 +62,8 @@ class _CategoriaViewState extends State<CategoriaView> {
 
       body:Container(
 
-        padding: EdgeInsets.all(20), //Margem
-
           //Imagem/Textura de fundo do app
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -85,62 +84,77 @@ class _CategoriaViewState extends State<CategoriaView> {
             children: [
               
               //Inicio icone principal
-              Image.asset('lib/image/logoapp.png'),
+              Image.asset('lib/image/logoapp.png',
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * .4,
+              ),
               //Fim icone principal
 
               //Botão Pizza Salgada
-              ElevatedButton(
-                style:ElevatedButton.styleFrom( 
-                  minimumSize: Size(350, 70),
-                  backgroundColor: Colors.white, 
-                  foregroundColor: Colors.red,
-                  textStyle: TextStyle(fontSize: 25),
+              Container(
+                width: MediaQuery.of(context).size.width * .9,
+                height: MediaQuery.of(context).size.height * .08,
+                child: ElevatedButton(
+                  style:ElevatedButton.styleFrom( 
+                    minimumSize: Size(350, 20),
+                    backgroundColor: Colors.white, 
+                    foregroundColor: Colors.red,
+                    textStyle: TextStyle(fontSize: 25),
+                  ),
+                
+                  onPressed: (){
+                    
+                    Navigator.pushNamed(context, 'cardapiosal');
+                    
+                  }, child: Text("Pizzas Salgada"),
                 ),
-
-                onPressed: (){
-                  
-                  Navigator.pushNamed(context, 'cardapiosal');
-                  
-                }, child: Text("Pizzas Salgada"),
               ),
               //Fim Botão Salgada
 
-              SizedBox(height: 50),
+              SizedBox(height: 22),
 
               //Botão Pizza Doce
-              ElevatedButton(
-                style:ElevatedButton.styleFrom( 
-                  minimumSize: Size(350, 70),
-                  backgroundColor: Colors.white, 
-                  foregroundColor: Colors.red,
-                  textStyle: TextStyle(fontSize: 25),
+              Container(
+                width: MediaQuery.of(context).size.width * .9,
+                height: MediaQuery.of(context).size.height * .08,
+                child: ElevatedButton(
+                  style:ElevatedButton.styleFrom( 
+                    minimumSize: Size(350, 70),
+                    backgroundColor: Colors.white, 
+                    foregroundColor: Colors.red,
+                    textStyle: TextStyle(fontSize: 25),
+                  ),
+                
+                  onPressed: (){
+                    
+                    Navigator.pushNamed(context, 'cardapiodoce');
+                    
+                  }, child: Text("Pizzas Doce"),
                 ),
-
-                onPressed: (){
-                  
-                  Navigator.pushNamed(context, 'cardapiodoce');
-                  
-                }, child: Text("Pizzas Doce"),
               ),
               //Botão Pizza Doce
 
 
-              SizedBox(height: 50),
+              SizedBox(height: 22),
 
               //Botão Bebidas
-              ElevatedButton(
-                style:ElevatedButton.styleFrom( 
-                  minimumSize: Size(350, 70),
-                  backgroundColor: Colors.white, 
-                  foregroundColor: Colors.red,
-                  textStyle: TextStyle(fontSize: 25),
+              Container(
+                width: MediaQuery.of(context).size.width * .9,
+                height: MediaQuery.of(context).size.height * .08,
+                child: ElevatedButton(
+                  style:ElevatedButton.styleFrom( 
+                    minimumSize: Size(350, 70),
+                    backgroundColor: Colors.white, 
+                    foregroundColor: Colors.red,
+                    textStyle: TextStyle(fontSize: 25),
+                  ),
+                
+                  onPressed: (){
+                    
+                    Navigator.pushNamed(context, 'bebidas');
+                    
+                  }, child: Text("Bebidas"),
                 ),
-
-                onPressed: (){
-                  
-                  Navigator.pushNamed(context, 'bebidas');
-                  
-                }, child: Text("Bebidas"),
               ),
               //Botão Bebidas
 

@@ -53,7 +53,7 @@ class _HomePageViewState extends State<HomePageView> {
         body: Container(
 
           //Imagem/Textura de fundo do app
-          padding: EdgeInsets.all(20),
+          width:  MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -79,7 +79,10 @@ class _HomePageViewState extends State<HomePageView> {
                 //Inicio Icone Principal
                 Column(
                   children: [
-                    Image.asset('lib/image/logoapp.png',height: 500,),
+                    Image.asset('lib/image/logoapp.png',
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * .4,
+                    ),
                   ],
                 ),
                 //Fim Icone Principal
@@ -90,19 +93,24 @@ class _HomePageViewState extends State<HomePageView> {
                   children: [
 
                     //Botão Login
-                    ElevatedButton(
-                      style:ElevatedButton.styleFrom( 
-                        minimumSize: Size(350, 60),
-                        backgroundColor: Colors.white, 
-                        foregroundColor: Colors.red,
-                        textStyle: TextStyle(fontSize: 25),
+                    // ignore: sized_box_for_whitespace
+                    Container(
+                      width: MediaQuery.of(context).size.width * .9,
+                      height: MediaQuery.of(context).size.height * .08,
+                      child: ElevatedButton(
+                        style:ElevatedButton.styleFrom( 
+                          minimumSize: Size(350, 60),
+                          backgroundColor: Colors.white, 
+                          foregroundColor: Colors.red,
+                          textStyle: TextStyle(fontSize: 25),
+                        ),
+                      
+                        onPressed: (){
+                          
+                          Navigator.pushNamed(context, 'login');
+                          
+                        }, child: Text("Login"),
                       ),
-
-                      onPressed: (){
-                        
-                        Navigator.pushNamed(context, 'login');
-                        
-                      }, child: Text("Login"),
                     ),
                     //Fim Botão Login
 
@@ -110,19 +118,24 @@ class _HomePageViewState extends State<HomePageView> {
                     SizedBox(height: 20), // Espaçamento
 
                     //Botão Cadastre-se
-                    ElevatedButton(
-                      style:ElevatedButton.styleFrom(
-                        minimumSize: Size(350, 60), 
-                        backgroundColor: Colors.white, 
-                        foregroundColor: Colors.red,
-                        textStyle: TextStyle(fontSize: 25),
+                    // ignore: sized_box_for_whitespace
+                    Container(
+                      width: MediaQuery.of(context).size.width * .9,
+                      height: MediaQuery.of(context).size.height * .08,
+                      child: ElevatedButton(
+                        style:ElevatedButton.styleFrom(
+                          minimumSize: Size(350, 60), 
+                          backgroundColor: Colors.white, 
+                          foregroundColor: Colors.red,
+                          textStyle: TextStyle(fontSize: 25),
+                        ),
+                      
+                        onPressed: () {
+                          
+                          Navigator.pushNamed(context, 'cadastro');
+                                        
+                        }, child: Text("Cadastrar-se"),
                       ),
-
-                      onPressed: () {
-                        
-                        Navigator.pushNamed(context, 'cadastro');
-                  
-                      }, child: Text("Cadastrar-se"),
                     )
                     //Fim Botão Cadastre-se
 

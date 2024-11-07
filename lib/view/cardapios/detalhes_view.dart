@@ -52,6 +52,7 @@ class _DetalhessalViewState extends State<DetalhessalView> {
       body: Container(
 
         //Imagem/Textura de fundo do app
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -71,7 +72,12 @@ class _DetalhessalViewState extends State<DetalhessalView> {
           children: [
 
             //Exibir Foto
-            Image.asset(dadosSal.fotoProd),
+            Image.asset(
+              dadosSal.fotoProd,
+              width: MediaQuery.of(context).size.width ,
+              height: MediaQuery.of(context).size.height * .5,
+            
+            ),
 
             //Exibe Nome Produto no detalhe
             ListTile(
@@ -106,15 +112,13 @@ class _DetalhessalViewState extends State<DetalhessalView> {
               ),
             ),
 
-            //SizedBox(height: 30), //Espaçamento
-
 
             //Icone do carrinho
             //Foi colocado em uma row para que possamos editar o espaçamento horizontal
             Row(
               mainAxisAlignment: MainAxisAlignment.end, //Espaçamento
               children: [
-                SizedBox(width: 280),
+                SizedBox(width: 250),
                 ElevatedButton(
                    style: ElevatedButton.styleFrom(
                       minimumSize: Size(10, 50),
