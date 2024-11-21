@@ -137,7 +137,7 @@ class _DetalhessalViewState extends State<DetalhessalView> {
                               SnackBar(
                                 content: Text('Produto adicionado com sucesso!!', style: TextStyle(fontSize: 15)),
                                 duration: Duration(seconds: 3),
-                                backgroundColor: Colors.red,
+                                backgroundColor: Colors.green.shade500,
                                 behavior: SnackBarBehavior.floating,
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(color: Colors.white, width: 2),

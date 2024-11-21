@@ -2,6 +2,7 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app08/controller/login_controller.dart';
 
 class EsqSenhaView extends StatefulWidget {
   const EsqSenhaView({super.key});
@@ -184,19 +185,8 @@ class _EsqSenhaViewState extends State<EsqSenhaView> {
                     
                         if(formkey.currentState!.validate()){
                           if(confirmaEmail.text == email.text){
+                            LoginController().esqueceuSenha(context, email.text);
                             Navigator.popAndPushNamed(context, 'login');
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Solicitação enviada!!', style: TextStyle(fontSize: 15)),
-                                duration: Duration(seconds: 3),
-                                backgroundColor: Colors.red,
-                                behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.white, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              )
-                            );
                           }
                           else if(confirmaEmail.text != email.text){
                             ScaffoldMessenger.of(context).showSnackBar(

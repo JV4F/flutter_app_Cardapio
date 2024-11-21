@@ -267,7 +267,7 @@ class _ConfirmaPedidoViewState extends State<ConfirmaPedidoView> {
                                 SnackBar(
                                   content: Text('Pedido Concluido!!', style: TextStyle(fontSize: 15)),
                                   duration: Duration(seconds: 3),
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: Colors.green.shade500,
                                   behavior: SnackBarBehavior.floating,
                                   shape: RoundedRectangleBorder(
                                     side: BorderSide(color: Colors.white, width: 2),

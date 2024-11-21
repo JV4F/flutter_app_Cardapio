@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app08/controller/login_controller.dart';
 import 'package:flutter_app08/model/usuario.dart';
 import 'package:flutter_app08/service/usuario_servide.dart';
 import 'package:get_it/get_it.dart';
@@ -29,6 +30,11 @@ class _CadastroViewState extends State<CadastroView> {
   var endereco = TextEditingController();
   var senha = TextEditingController();
   var confirmaSenha = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
 
   @override
@@ -344,21 +350,7 @@ class _CadastroViewState extends State<CadastroView> {
                       
                           if(formkey.currentState!.validate()){
                             if(senha.text == confirmaSenha.text){
-                              srv.usuario.add(Usuario(nome.text, email.text, telefone.text, endereco.text, senha.text, confirmaSenha.text));
-                              Navigator.popAndPushNamed(context, 'categoria');
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                content: Text('Cadastrado com sucesso!!', style: TextStyle(fontSize: 15)),
-                                duration: Duration(seconds: 3),
-                                backgroundColor: Colors.red,
-                                behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.white, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              )
-                              );
-                      
+                              LoginController().criarConta(context, nome.text, email.text, senha.text);
                             }
                             if(senha.text != confirmaSenha.text){
                               ScaffoldMessenger.of(context).showSnackBar(

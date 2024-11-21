@@ -2,6 +2,7 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app08/controller/login_controller.dart';
 import 'package:flutter_app08/service/usuario_servide.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,9 +19,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
 
   //Atributos
-  final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  final msgKey = GlobalKey<ScaffoldMessengerState>();
+  var nome = TextEditingController();
   var email = TextEditingController();
   var senha = TextEditingController();
 
@@ -180,10 +180,9 @@ class _LoginViewState extends State<LoginView> {
 
                   //Esqueceu Senha
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                          padding: EdgeInsets.fromLTRB(0,0, 70, 0),
                           child: TextButton(
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.red.shade100,
@@ -201,7 +200,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   //Fim Esqueceu senha
 
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
 
                   //Botão Entrar
                   Container(
@@ -216,54 +215,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       onPressed:(){
                     
-                        if(formkey.currentState!.validate()){
-                          final user = srv.retornarUser(email.text);
-                          if(user == null){
-                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Usuario não cadastrado!!', style: TextStyle(fontSize: 15)),
-                                duration: Duration(seconds: 3),
-                                backgroundColor: Colors.red,
-                                behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.white, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                
-                              )
-                            );
-                          }
-                          else if(user.email == email.text && user.senha == senha.text){
-                           Navigator.popAndPushNamed(context, 'categoria'); 
-                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Login feito com sucesso!!', style: TextStyle(fontSize: 15)),
-                                duration: Duration(seconds: 3),
-                                backgroundColor: Colors.red,
-                                behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.white, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                
-                              )
-                            );
-                          }
-                          else if(user.email != email.text || user.senha != senha.text){
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Email ou Senha Errado!!', style: TextStyle(fontSize: 15)),
-                                duration: Duration(seconds: 3),
-                                backgroundColor: Colors.red,
-                                behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.white, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              )
-                            );
-                          }
-                        }
+                       LoginController().login(context, nome.text,email.text, senha.text);
                     
                       },child: Text('Entrar')
                     
