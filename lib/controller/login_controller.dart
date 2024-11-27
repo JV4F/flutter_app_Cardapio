@@ -8,7 +8,7 @@ import 'package:flutter_app08/view/components/mensagem.dart';
 class LoginController{
  final FirebaseAuth auth = FirebaseAuth.instance;
 
- void criarConta(context, nome, email, senha) {
+ void criarConta(context, nome, email, telefone, endereco, senha) {
    auth.createUserWithEmailAndPassword(
       email: email, password: senha
     ).then((resultado){
@@ -20,6 +20,9 @@ class LoginController{
         {
           'uid' : resultado.user!.uid,
           'nome' : nome,
+          'email': email,
+          'phone' : telefone,
+          "Cep" : endereco
         }
       );
 

@@ -2,9 +2,10 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app08/controller/login_controller.dart';
-import 'package:flutter_app08/service/usuario_servide.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../controller/login_controller.dart';
+import '../../service/usuario_servide.dart';
 
 final UsuarioService srv = GetIt.instance<UsuarioService>(); //Para que possamos usar o getIt dentro da tela
 

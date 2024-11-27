@@ -2,11 +2,11 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app08/controller/login_controller.dart';
-import 'package:flutter_app08/model/usuario.dart';
-import 'package:flutter_app08/service/usuario_servide.dart';
 import 'package:get_it/get_it.dart';
 import 'package:email_validator/email_validator.dart';
+
+import '../../controller/login_controller.dart';
+import '../../service/usuario_servide.dart';
 
 
 final UsuarioService srv = GetIt.instance<UsuarioService>();
@@ -350,7 +350,7 @@ class _CadastroViewState extends State<CadastroView> {
                       
                           if(formkey.currentState!.validate()){
                             if(senha.text == confirmaSenha.text){
-                              LoginController().criarConta(context, nome.text, email.text, senha.text);
+                              LoginController().criarConta(context, nome.text, email.text, telefone.text, endereco.text, senha.text);
                             }
                             if(senha.text != confirmaSenha.text){
                               ScaffoldMessenger.of(context).showSnackBar(

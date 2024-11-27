@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_adjacent_string_concatenation
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../controller/carrinho_controller.dart';
+import '../../service/produto_service.dart';
 
 final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
@@ -71,11 +74,9 @@ class _CarrinhoViewState extends State<CarrinhoView> {
       ),
       //Barra Superior
 
-      body:Container(
-
-        padding: EdgeInsets.all(20), //Margem
-
+       body: Container(
         //Imagem/Textura de fundo do app
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -86,75 +87,71 @@ class _CarrinhoViewState extends State<CarrinhoView> {
               ),
             ),
           ),
-        //Fim Imagem/Textura de fundo do app
+        // Fim Imagem/Textura de fundo do app
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: CarrinhoController().listarCarrinho(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    return Center(
+                      child: Text('Não foi possível conectar.'),
+                    );
+                  case ConnectionState.waiting:
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  default:
+                    final dados = snapshot.requireData;
+                    if (dados.size > 0) {
+                      return ListView.builder(
+                        itemCount: dados.size,
+                        itemBuilder: (context, index) {
+                          dynamic id = dados.docs[index].id;
+                          dynamic item = dados.docs[index].data();
+                          return Card(
+                            child: ListTile(
+                              leading: Image.asset(item['imagem']),
+                              title: Text(item['nome']),
+                              subtitle: Text('${item['preco'].toStringAsFixed(2)}'),
 
-        //Criação do Listview
-        child: ListView.builder(
-          itemCount: srv.carrinho.length,
-          itemBuilder: (context, index){
+                              //Icone delete no produto
+                              trailing: IconButton(
+                                icon: Icon(Icons.delete_forever),
+                                onPressed: (){
+                                  
+                                  /*Produto p = Produto(
+                                    FirebaseAuth.instance.currentUser!.uid,
+                                    item['preco'],
+                                    item['nome'],
+                                    item['descricao'],
+                                    item['imagem'],
+                                  );*/
 
-            return Column(
+                                  
+                                  CarrinhoController().excluir (context, id);
 
-              children: [
+                                  
+                                },
+                              ),
+                              //Fim Icone delete no produto
 
-                Card(
-                        
-                  child: ListTile( //Inicio ListTile
-                  
-                    //Exibe image do produto no cardapio
-                    leading: Image.asset(srv.carrinho[index].fotoProd),
-                  
-                    //Exibe nome do produto no cardapio
-                    title: Text(
-                      srv.carrinho[index].nomeProd,
-                      style: TextStyle(
-                      fontSize: 20,
-                      ),
-                    ),
-                  
-                    //Exibe preço do produto no cardapio
-                    subtitle: Text(
-                      '${srv.carrinho[index].precoProd.toStringAsFixed(2)}',
-                        style: TextStyle(
-                        fontSize: 16,
-                        fontStyle: FontStyle.normal,
-                      ),
-                    ),
-                  
-                    //Icone seta no produto
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete_forever),
-                      onPressed: (){
-
-                        setState(() {
-                           if(srv.carrinho.isEmpty){
-                            srv.valorTotal = 0;
-                        }
-
-                        if(srv.carrinho.isNotEmpty){
-                          srv.valorTotal = srv.valorTotal - srv.carrinho[index].precoProd;
-                        }
-
-                          srv.carrinho.removeAt(index);
-                        });
-                        
-                      },
-                    ),
-                    //Fim Icone seta no produto
-
-                
-                  ),
-                  
-                ),
-
-              ], //Children
-
-            );
-              
-          },
-
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return Center(
+                        child: Text('Nenhum produto encontrado.'),
+                      );
+                    }
+                }
+              },
+            ),
+          ),
         ),
-          
       ),
 
     );

@@ -2,7 +2,8 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app08/controller/login_controller.dart';
+
+import '../../controller/login_controller.dart';
 
 class EsqSenhaView extends StatefulWidget {
   const EsqSenhaView({super.key});

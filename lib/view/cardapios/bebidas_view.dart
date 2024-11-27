@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../controller/produto_controller.dart';
+import '../../service/produto_service.dart';
 
 final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
@@ -61,9 +64,9 @@ class _BebidasViewState extends State<BebidasView> {
       ),
       //Fim Barra Superior
 
-      body: Container( 
-        
+      body: Container(
         //Imagem/Textura de fundo do app
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
@@ -75,65 +78,58 @@ class _BebidasViewState extends State<BebidasView> {
             ),
           ),
         // Fim Imagem/Textura de fundo do app
-
-          padding: EdgeInsets.all(20), //Margem
-
-          //Criação do Listview
-          child: ListView.builder(
-            itemCount: srv.bebida.length,
-            itemBuilder: (context, index){
-
-            return Card( //Para que os itens do cardapio fique em um "Cartão"
-
-              child: ListTile( //Inicio ListTile
-
-                //Exibe image do produto no cardapio
-                leading: Image.asset(srv.bebida[index].fotoProd),
-
-                //Exibe nome do produto no cardapio
-                title: Text(
-                  srv.bebida[index].nomeProd,
-                  style: TextStyle(
-                  fontSize: 20,
-                  ),
-                ),
-
-                //Exibe preço do produto no cardapio
-                subtitle: Text(
-                  '${srv.bebida[index].precoProd.toStringAsFixed(2)}',
-                    style: TextStyle(
-                    fontSize: 16,
-                    fontStyle: FontStyle.normal,
-                  ),
-                ),
-
-                //Icone seta no produto
-                trailing: Icon(
-                  Icons.arrow_right,
-                ),
-
-                
-                hoverColor: Colors.purple.shade100, //Cor quando é colocado o item é clickado
-                
-                //Ação para o click no Produto
-                onTap: () {
-                  //Navegar para Detalhes
-                  Navigator.pushNamed(
-                    context, 'detalhesbebidas',
-                    arguments: srv.bebida[index], //Passando o index do produto para a proxima tela "detalhesbebidas"
-                  );
-                },
-                //Fim ação para o click no Produto
-
-              ),
-              //Fim ListTile
-
-            );
-
-          }, //Child
-
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: ProdutoController().listarBebidas(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    return Center(
+                      child: Text('Não foi possível conectar.'),
+                    );
+                  case ConnectionState.waiting:
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  default:
+                    final dados = snapshot.requireData;
+                    if (dados.size > 0) {
+                      return ListView.builder(
+                        itemCount: dados.size,
+                        itemBuilder: (context, index) {
+                          dynamic item = dados.docs[index].data();
+                          return Card(
+                            child: ListTile(
+                              leading: Image.asset(item['imagem']),
+                              title: Text(item['nome']),
+                              subtitle: Text('${item['preco'].toStringAsFixed(2)}'),
+                              //Icone seta no produto
+                              trailing: Icon(
+                                Icons.arrow_right,
+                              ),
+        
+                              hoverColor: Colors.purple.shade100, //Cor quando é colocado o item é clickado
+        
+                              onTap: () {
+                                //Navigator
+                                Navigator.pushNamed(context, 'detalhesbebidas', arguments: item);
+                              },
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return Center(
+                        child: Text('Nenhum produto encontrado.'),
+                      );
+                    }
+                }
+              },
+            ),
+          ),
         ),
-
       ),
 
     );

@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app08/model/produto.dart';
-import 'package:flutter_app08/service/produto_service.dart';
 import 'package:get_it/get_it.dart';
 
-final ProdutoService srv = GetIt.instance<ProdutoService>(); //Para que possamos usar o getIt dentro da tela
+import '../../controller/carrinho_controller.dart';
+import '../../model/produto.dart';
+import '../../service/produto_service.dart';
+
+final ProdutoService srv = GetIt.instance<
+    ProdutoService>(); //Para que possamos usar o getIt dentro da tela
 
 class DetalhessalView extends StatefulWidget {
   const DetalhessalView({super.key});
@@ -17,25 +21,23 @@ class DetalhessalView extends StatefulWidget {
 class _DetalhessalViewState extends State<DetalhessalView> {
   @override
   Widget build(BuildContext context) {
-
-    final Produto dadosSal = ModalRoute.of(context)!.settings.arguments as Produto; //Dado Recebido de "cardapioSal_view"
-
+    final dynamic dadosSal = ModalRoute.of(context)!.settings.arguments
+        as Map<String, dynamic>; //Dado Recebido de "cardapioSal_view"
     return Scaffold(
-      
-      //Backgraund para clarear a imagem/Textura utilizada 
+      //Backgraund para clarear a imagem/Textura utilizada
       backgroundColor: Colors.green.shade700,
-      
+
       //Barra Superior
       appBar: AppBar(
         backgroundColor: Colors.red.shade900, //Cor barra superior
-        
+
         //Seta para voltar
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
-          onPressed:(){
+          onPressed: () {
             Navigator.pop(context);
-          }, 
+          },
         ),
         //Fim Seta
 
@@ -43,126 +45,117 @@ class _DetalhessalViewState extends State<DetalhessalView> {
         title: Text(
           'Detalhes',
           style: TextStyle(color: Colors.white),
-          ),
+        ),
         //Fim Texto
-
       ),
       //Fim Barra Superior
 
       body: Container(
 
-        //Imagem/Textura de fundo do app
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+          //Imagem/Textura de fundo do app
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/image/fundoapp.jpg'),
               fit: BoxFit.cover, //SERVE PARA EXPANDIR
               colorFilter: ColorFilter.mode(
                 Colors.white.withOpacity(0.3),
-                BlendMode.dstATop, 
+                BlendMode.dstATop,
               ),
             ),
           ),
-        // Fim Imagem/Textura de fundo do app
-        
-        padding: EdgeInsets.all(20), //Margem
+          // Fim Imagem/Textura de fundo do app
 
-        child: ListView( //Inicio ListView
+          padding: EdgeInsets.all(20), //Margem
 
-          children: [
+          child: ListView(
+            //Inicio ListView
 
-            //Exibir Foto
-            Image.asset(
-              dadosSal.fotoProd,
-              width: MediaQuery.of(context).size.width ,
-              height: MediaQuery.of(context).size.height * .5,
-            
-            ),
-
-            //Exibe Nome Produto no detalhe
-            ListTile(
-              title: Text(
-                dadosSal.nomeProd,
-                style: TextStyle(fontSize: 26),
+            children: [
+              //Exibir Foto
+              Image.asset(
+                dadosSal['imagem'],
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * .5,
               ),
-            ),
 
-           ListTile(
-              subtitle: Text(
-                dadosSal.descricaoProd,
-                  style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                  ),
-                textAlign: TextAlign.justify, // Alinha o texto de forma justificada
-              ),
-            ),
- 
-
-            //Exibe Preço do produto no detalhe
-            ListTile(
-              title: Text(
-                'Preço:  R\$'
-                '${dadosSal.precoProd.toStringAsFixed(2)}',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+              //Exibe Nome Produto no detalhe
+              ListTile(
+                title: Text(
+                  dadosSal['nome'],
+                  style: TextStyle(fontSize: 26),
                 ),
-                
               ),
-            ),
 
+              ListTile(
+                subtitle: Text(
+                  dadosSal['descricao'],
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
+                  textAlign:
+                      TextAlign.justify, // Alinha o texto de forma justificada
+                ),
+              ),
 
-            //Icone do carrinho
-            //Foi colocado em uma row para que possamos editar o espaçamento horizontal
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end, //Espaçamento
-              children: [
-                SizedBox(width: 250),
-                ElevatedButton(
-                   style: ElevatedButton.styleFrom(
+              //Exibe Preço do produto no detalhe
+              ListTile(
+                title: Text(
+                  'Preço:  R\$'
+                  '${dadosSal['preco'].toStringAsFixed(2)}',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              //Icone do carrinho
+              //Foi colocado em uma row para que possamos editar o espaçamento horizontal
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end, //Espaçamento
+                children: [
+                  SizedBox(width: 250),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
                       minimumSize: Size(10, 50),
                       backgroundColor: Colors.red.shade900,
                       foregroundColor: Colors.white,
                       textStyle: TextStyle(fontSize: 20),
                     ),
-                    
-                  onPressed:(){ //Ação botão quando pressionado
-                    
-                    //Adiciona item ao carrinho e Valor total recebe o valor do produto
-                    srv.carrinho.add(Produto(dadosSal.precoProd, dadosSal.nomeProd, dadosSal.descricaoProd, dadosSal.fotoProd));
-                    srv.valorTotal += dadosSal.precoProd;
+                    onPressed: () {
+                      //Ação botão quando pressionado
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Produto adicionado com sucesso!!', style: TextStyle(fontSize: 15)),
-                                duration: Duration(seconds: 3),
-                                backgroundColor: Colors.green.shade500,
-                                behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(color: Colors.white, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              )
-                            );
+                      Produto p = Produto(
+                        FirebaseAuth.instance.currentUser!.uid,
+                        dadosSal['preco'],
+                        dadosSal['nome'],
+                        dadosSal['descricao'],
+                        dadosSal['imagem'],
+                      );
 
-                 }, child: Text('+'),
+                      CarrinhoController().adicionar(context, p);
 
-                )
-
-              ], //Children
-
-            ),
-            //Fim Icone do carrinho
-
-          ], //Children
-
-        )
-      
-      ),
-
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Produto adicionado com sucesso!!',
+                            style: TextStyle(fontSize: 15)),
+                        duration: Duration(seconds: 3),
+                        backgroundColor: Colors.green.shade500,
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ));
+                    },
+                    child: Text('+'),
+                  )
+                ], //Children
+              ),
+              //Fim Icone do carrinho
+            ], //Children
+          )),
     );
-
   } //Build
-
 } //Class
