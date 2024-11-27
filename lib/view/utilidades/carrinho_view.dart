@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-
 import '../../controller/carrinho_controller.dart';
 import '../../service/produto_service.dart';
 
@@ -21,7 +20,6 @@ class _CarrinhoViewState extends State<CarrinhoView> {
   //Atributos
   var formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  final msgKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -121,19 +119,11 @@ class _CarrinhoViewState extends State<CarrinhoView> {
                               trailing: IconButton(
                                 icon: Icon(Icons.delete_forever),
                                 onPressed: (){
-                                  
-                                  /*Produto p = Produto(
-                                    FirebaseAuth.instance.currentUser!.uid,
-                                    item['preco'],
-                                    item['nome'],
-                                    item['descricao'],
-                                    item['imagem'],
-                                  );*/
-
-                                  
+                                  srv.valorTotal -= item['preco'];
                                   CarrinhoController().excluir (context, id);
-
-                                  
+                                  if(srv.valorTotal < 0){
+                                    srv.valorTotal = 0;
+                                  }
                                 },
                               ),
                               //Fim Icone delete no produto

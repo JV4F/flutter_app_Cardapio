@@ -216,7 +216,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       onPressed:(){
                     
-                       LoginController().login(context, nome.text,email.text, senha.text);
+                       LoginController().login(context,email.text, senha.text);
                     
                       },child: Text('Entrar')
                     

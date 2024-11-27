@@ -258,10 +258,25 @@ class _ConfirmaPedidoViewState extends State<ConfirmaPedidoView> {
                             textStyle: TextStyle(fontSize: 25),
                           ),
                           onPressed: (){
-                            if(isChecked == true || isChecked2 == true || isChecked3 == true || isChecked4 == true){
+                            if(isChecked == true || isChecked2 == true || isChecked3 == true || isChecked4 == true ){
+
+                              if(srv.valorTotal == 0){
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Falha na compra!!', style: TextStyle(fontSize: 15)),
+                                  duration: Duration(seconds: 3),
+                                  backgroundColor: Colors.red,
+                                  behavior: SnackBarBehavior.floating,
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(color: Colors.white, width: 2),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                )
+                              );
+                              return; 
+                            }
                               Navigator.popAndPushNamed(context, 'categoria');
-                              srv.carrinho.length = 0;
-                              srv.valorTotal = 0;
+                              //srv.valorTotal = 0;
                     
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

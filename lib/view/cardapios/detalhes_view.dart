@@ -21,8 +21,7 @@ class DetalhessalView extends StatefulWidget {
 class _DetalhessalViewState extends State<DetalhessalView> {
   @override
   Widget build(BuildContext context) {
-    final dynamic dadosSal = ModalRoute.of(context)!.settings.arguments
-        as Map<String, dynamic>; //Dado Recebido de "cardapioSal_view"
+    final dynamic dadosSal = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>; //Dado Recebido de "cardapioSal_view"
     return Scaffold(
       //Backgraund para clarear a imagem/Textura utilizada
       backgroundColor: Colors.green.shade700,
@@ -136,18 +135,8 @@ class _DetalhessalViewState extends State<DetalhessalView> {
                       );
 
                       CarrinhoController().adicionar(context, p);
+                      srv.valorTotal += p.precoProd;
 
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Produto adicionado com sucesso!!',
-                            style: TextStyle(fontSize: 15)),
-                        duration: Duration(seconds: 3),
-                        backgroundColor: Colors.green.shade500,
-                        behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.white, width: 2),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ));
                     },
                     child: Text('+'),
                   )

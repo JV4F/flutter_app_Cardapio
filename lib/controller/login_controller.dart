@@ -3,7 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app08/view/components/mensagem.dart';
+
+import '../view/components/mensagem.dart';
 
 class LoginController{
  final FirebaseAuth auth = FirebaseAuth.instance;
@@ -47,7 +48,7 @@ class LoginController{
   // Efetuar o login de um usuário previamente cadastrado
   // no serviço Firebase Authentication
   //
-  void login(context, nome, email, senha) {
+  void login(context, email, senha) {
     auth.signInWithEmailAndPassword(
       email: email, password: senha
     ).then((resultado){

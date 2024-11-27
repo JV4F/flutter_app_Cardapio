@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_app08/controller/login_controller.dart';
-import 'package:flutter_app08/model/produto.dart';
-import 'package:flutter_app08/view/components/mensagem.dart';
+
+import '../model/produto.dart';
+import '../view/components/mensagem.dart';
+
 
 class CarrinhoController {
 
@@ -21,7 +21,7 @@ class CarrinhoController {
     db.collection('Carrinho').doc(id)
       .delete()
       .then((value) =>
-        sucesso(context, 'Produto adicionado com sucesso!'))
+        sucesso(context, 'Produto removido com sucesso!'))
       .catchError((e) => 
         erro(context, 'Não foi possivel realizar a operação!'));
   }
